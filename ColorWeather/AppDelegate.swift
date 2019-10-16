@@ -15,6 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        // TODO: remove test code
+//        let getWeatherDataService = GetWeatherDataService()
+//
+//        getWeatherDataService.getWeatherData(from: "san+francisco,us",
+//                                             completion: { weatherDataModel, error in
+//                                                guard error == nil else {
+//                                                    print("***** ERROR *****")
+//                                                    return
+//                                                }
+//                                                print("***** weatherDataModel: \(weatherDataModel)")
+//        })
+
         return true
     }
 
