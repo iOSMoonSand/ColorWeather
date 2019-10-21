@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // TODO: remove test code
-//        let getWeatherDataService = GetWeatherDataService()
+//        let weatherDataRequestService = WeatherDataRequestService()
 //
-//        getWeatherDataService.getWeatherData(from: "san+francisco,us",
+//        weatherDataRequestService.requestWeatherData(from: "san+francisco,us",
 //                                             completion: { weatherDataModel, error in
 //                                                guard error == nil else {
 //                                                    print("***** ERROR *****")

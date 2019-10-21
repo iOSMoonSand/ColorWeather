@@ -1,39 +1,49 @@
 //
-//  GetWeatherDataService.swift
+//  WeatherDataRequestService.swift
 //  ColorWeather
 //
 //  Created by Alexis Schreier on 10/15/19.
 //  Copyright © 2019 iOS MoonSand. All rights reserved.
 //
 
-final class GetWeatherDataService {
+import os
+
+final class WeatherDataRequestService {
     
-    private let client = Client(baseURL: ClientConstants.baseURL)
+    private let client = WebClient(baseURL: WebClientConstants.baseURL)
     
-    func getWeatherData(from searchTerms: String,
-                        completion: @escaping ((WeatherDataModel?, Error?) -> Void)) {
+    func requestWeatherData(from searchTerms: String,
+                        completion: @escaping ((WeatherDataModel?, RequestError?) -> Void)) {
         
         // TODO: will need mechanism to clean search terms string before it can be used as a URL component
-        let parameters: JSONDictionary = [ClientConstants.queryKey: searchTerms]
-        client.request(with: ClientConstants.weatherPath,
+        let parameters: JSONDictionary = [WebClientConstants.queryKey: searchTerms]
+        
+        client.request(with: WebClientConstants.weatherPath,
                        parameters: parameters,
                        completion: { dataDictionary, error in
                         
-                        guard error == nil else {
+                        switch error {
+                        case .some(let error) where error == RequestError.notConnectedToInternet:
+                            //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription`
                             completion(nil, error)
-                            // TODO: review errors and logging and nil results
-                            return
+                            
+                        case .some(let error):
+                            //TODO: Display "trouble getting data" error message in UI using `error.errorDescription`
+                            completion(nil, error)
+                            
+                        case .none:
+                            break
                         }
                         
                         guard
                             let dataDictionary = dataDictionary,
-                            let weatherArray = dataDictionary[ClientConstants.weatherObjectKey] as? [JSONDictionary],
+                            let weatherArray = dataDictionary[WebClientConstants.weatherObjectKey] as? [JSONDictionary],
                             let weatherDictionary = weatherArray.first,
                             let weatherModel = WeatherModel(jsonDictionary: weatherDictionary),
-                            let mainDictionary = dataDictionary[ClientConstants.mainObjectKey] as? JSONDictionary,
+                            let mainDictionary = dataDictionary[WebClientConstants.mainObjectKey] as? JSONDictionary,
                             let mainModel = MainModel(jsonDictionary: mainDictionary)
                         else {
-                            // TODO: review errors and logging and nil results
+                            os_log(OSLogConstants.WebService.errorFailedDataModeling, log: .webService, type: .error)
                             return
                         }
                         
