@@ -114,6 +114,7 @@ final class WebClient {
                 
             } catch {
                 // The do-catch statement includes a local variable `error` to handle all thrown error types.
+                os_log(OSLogConstants.WebService.errorFailedSerialization, log: .webService, type: .error, error.localizedDescription)
                 completion(nil, error as? RequestError)
             }
         }
