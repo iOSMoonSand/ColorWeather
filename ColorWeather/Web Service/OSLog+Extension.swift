@@ -22,5 +22,8 @@ extension OSLog {
     private static let subsystem = Bundle.main.bundleIdentifier!
     
     // MARK: Custom Categories
+    
+    static let coreData = OSLog(subsystem: subsystem, category: "Core Data")
+    static let general = OSLog(subsystem: subsystem, category: "General")
     static let webService = OSLog(subsystem: subsystem, category: "Web Service")
 }

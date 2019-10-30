@@ -24,11 +24,11 @@ final class WeatherDataRequestService {
                         
                         switch error {
                         case .some(let error) where error == RequestError.notConnectedToInternet:
-                            //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription`
+                            //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription` on the main thread.
                             completion(nil, error)
                             
                         case .some(let error):
-                            //TODO: Display "trouble getting data" error message in UI using `error.errorDescription`
+                            //TODO: Display "trouble getting data" error message in UI using `error.errorDescription` on the main thread.
                             completion(nil, error)
                             
                         case .none:
@@ -53,6 +53,7 @@ final class WeatherDataRequestService {
                                                                 tempMin: mainModel.tempMin,
                                                                 tempMax: mainModel.tempMax)
                         
+                        //TODO: Display results in UI on the main thread.
                         completion(weatherDataModel, nil)
         })
     }
