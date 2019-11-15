@@ -10,6 +10,7 @@ import Foundation
 import os
 
 typealias JSONDictionary = [String: Any]
+typealias LocationCoordinates = (latitude: Double, longitude: Double)
 
 enum RequestMethod: String {
     case get = "GET"
@@ -22,6 +23,7 @@ struct WebClientConstants {
     // Keys
     static let appIdKey = "appid"
     static let queryKey = "q"
+    static let coordinatesKey = (latitude: "lat", longitude: "lon")
     
     // URL Components
     static let baseURL = "https://api.openweathermap.org/data/2.5"
@@ -106,15 +108,13 @@ final class WebClient {
                 return
             }
             
-            var dataDictionary: JSONDictionary?
-            
             do {
-                dataDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary
+                let dataDictionary: JSONDictionary? = try JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary
                 completion(dataDictionary, nil)
                 
             } catch {
                 // The do-catch statement includes a local variable `error` to handle all thrown error types.
-                os_log(OSLogConstants.WebService.errorFailedSerialization, log: .webService, type: .error, error.localizedDescription)
+                os_log(OSLogConstants.Shared.errorFailedSerialization, log: .webService, type: .error, error.localizedDescription)
                 completion(nil, error as? RequestError)
             }
         }
