@@ -10,6 +10,7 @@ import Foundation
 import os
 
 typealias JSONDictionary = [String: Any]
+typealias LocationCoordinates = (latitude: Double, longitude: Double)
 
 enum RequestMethod: String {
     case get = "GET"
@@ -22,6 +23,7 @@ struct WebClientConstants {
     // Keys
     static let appIdKey = "appid"
     static let queryKey = "q"
+    static let coordinatesKey = (latitude: "lat", longitude: "lon")
     
     // URL Components
     static let baseURL = "https://api.openweathermap.org/data/2.5"

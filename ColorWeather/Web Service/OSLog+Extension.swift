@@ -23,6 +23,7 @@ extension OSLog {
     
     // MARK: Custom Categories
     
+    static let clGeocoder = OSLog(subsystem: subsystem, category: "CLGeocoder")
     static let coreData = OSLog(subsystem: subsystem, category: "Core Data")
     static let general = OSLog(subsystem: subsystem, category: "General")
     static let webService = OSLog(subsystem: subsystem, category: "Web Service")

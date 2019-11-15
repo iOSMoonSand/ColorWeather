@@ -12,22 +12,21 @@ final class WeatherDataRequestService {
     
     private let client = WebClient(baseURL: WebClientConstants.baseURL)
     
-    func requestWeatherData(from searchTerms: String,
+    func requestWeatherData(from coordinates: LocationCoordinates,
                         completion: @escaping ((WeatherDataModel?, RequestError?) -> Void)) {
         
-        // TODO: will need mechanism to clean search terms string before it can be used as a URL component
-        let parameters: JSONDictionary = [WebClientConstants.queryKey: searchTerms]
+        let parameters: JSONDictionary = [
+            WebClientConstants.coordinatesKey.latitude: coordinates.latitude,
+            WebClientConstants.coordinatesKey.longitude: coordinates.longitude
+        ]
         
         client.request(with: WebClientConstants.weatherPath,
                        parameters: parameters,
                        completion: { dataDictionary, error in
                         
                         switch error {
-                        case .some(let error) where error == RequestError.notConnectedToInternet:
-                            //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription` on the main thread.
-                            completion(nil, error)
                             
-                        case .some(let error):
+                        case .some(_):
                             //TODO: Display "trouble getting data" error message in UI using `error.errorDescription` on the main thread.
                             completion(nil, error)
                             
