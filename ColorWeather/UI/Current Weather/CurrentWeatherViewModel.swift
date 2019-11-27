@@ -1,5 +1,5 @@
 //
-//  CityWeatherViewModel.swift
+//  CurrentWeatherViewModel.swift
 //  ColorWeather
 //
 //  Created by Alexis Schreier on 11/15/19.
@@ -10,7 +10,7 @@ import CoreLocation
 import os
 import SwiftUI
 
-class CityWeatherViewModel: ObservableObject {
+class CurrentWeatherViewModel: ObservableObject {
     
     // MARK: - Stateful Properties
     

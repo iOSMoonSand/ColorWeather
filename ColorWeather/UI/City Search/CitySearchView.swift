@@ -31,7 +31,7 @@ struct CitySearchView: View {
             NavigationView {
                 List {
                     ForEach(searchCompleter.results, id: \.self) { searchResult in
-                        NavigationLink(destination: CityWeatherView(city: searchResult)) {
+                        NavigationLink(destination: CurrentWeatherView(city: searchResult)) {
                             Text(searchResult)
                         }
                     }
