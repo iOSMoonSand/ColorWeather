@@ -34,10 +34,7 @@ struct RepresentedPageViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIPageViewController, context: UIViewControllerRepresentableContext<RepresentedPageViewController>) {
         
-        print("****** updateUIViewController FIRED *****")
-//        uiViewController.setViewControllers([controllers[0]],
-//                                            direction: .forward,
-//                                            animated: false)
+        // TODO: See what this is used for.
     }
     
     class Coordinator: NSObject, UIPageViewControllerDataSource {
