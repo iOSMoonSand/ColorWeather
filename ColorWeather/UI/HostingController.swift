@@ -12,4 +12,9 @@ class HostingController<Content>: UIHostingController<Content> where Content : V
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    // TODO: Use this method to update display when swiping instead of buggy .onAppear.
+    override func viewDidAppear(_ animated: Bool) {
+        print("**** VIEW DID APPEAR ****")
+    }
 }
