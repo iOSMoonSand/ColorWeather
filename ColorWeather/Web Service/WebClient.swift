@@ -26,7 +26,7 @@ struct WebClientConstants {
     static let coordinatesKey = (latitude: "lat", longitude: "lon")
     
     // URL Components
-    static let baseURL = "https://api.openweathermap.org/data/2.5"
+    static let baseURLString = "https://api.openweathermap.org/data/2.5"
     static let weatherPath = "/weather"
     
     // Response Object Keys
@@ -36,9 +36,12 @@ struct WebClientConstants {
 
 final class WebClient {
     
-    private let baseURL: String
+    private let session: URLSession
+    private let baseURL: URL
     
-    init(baseURL: String) {
+    init(session: URLSession = URLSession(configuration: .default),
+         baseURL: URL) {
+        self.session = session
         self.baseURL = baseURL
     }
     
@@ -54,23 +57,19 @@ final class WebClient {
                  parameters: JSONDictionary,
                  completion: @escaping (JSONDictionary?, RequestError?) -> Void) {
         
-        let defaultSession = URLSession(configuration: .default)
+        
         var dataTask: URLSessionDataTask?
         
         dataTask?.cancel()
         
-        // Add the common parameters to the passed-in dictionary.
-        var params = parameters
-        params[WebClientConstants.appIdKey] = AppSecrets.openWeatherAPIKey
-        
-        guard let url = URL(baseURL: baseURL, path: path, parameters: params) else {
+        guard let url = URL(baseURL: baseURL, path: path, parameters: parameters) else {
             os_log(OSLogConstants.WebService.errorInvalidURL, log: .webService, type: .error)
             completion(nil, RequestError.invalidURL)
             return
         }
         
         // TODO: needs more comments and maybe refacto
-        dataTask = defaultSession.dataTask(with: url) { data, response, error in
+        dataTask = session.dataTask(with: url) { data, response, error in
             
             // Once we've completed the data task we kill it to make sure
             // a new one gets initialized the next time we want to perform one.
@@ -115,7 +114,7 @@ final class WebClient {
             } catch {
                 // The do-catch statement includes a local variable `error` to handle all thrown error types.
                 os_log(OSLogConstants.Shared.errorFailedSerialization, log: .webService, type: .error, error.localizedDescription)
-                completion(nil, error as? RequestError)
+                completion(nil, RequestError.failedJSONSerialization)
             }
         }
         

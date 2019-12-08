@@ -10,15 +10,18 @@ import Foundation
 
 extension URL {
     
-    init?(baseURL: String, path: String, parameters: JSONDictionary) {
+    init?(baseURL: URL, path: String, parameters: JSONDictionary) {
         
-        guard var urlComponents = URLComponents(string: baseURL) else {
+        guard var urlComponents = URLComponents(url: baseURL,
+                                                resolvingAgainstBaseURL: true) else {
             return nil
         }
         
         urlComponents.path += path
-        urlComponents.queryItems = parameters.map {
-            URLQueryItem(name: $0.key, value: String(describing: $0.value))
+        if !parameters.isEmpty {
+            urlComponents.queryItems = parameters.map {
+                URLQueryItem(name: $0.key, value: String(describing: $0.value))
+            }
         }
         
         guard let url = urlComponents.url else {

@@ -6,18 +6,20 @@
 //  Copyright © 2019 iOS MoonSand. All rights reserved.
 //
 
+import Foundation
 import os
 
 final class WeatherDataRequestService {
     
-    private let client = WebClient(baseURL: WebClientConstants.baseURL)
+    private let client = WebClient(baseURL: URL(string: WebClientConstants.baseURLString)!)
     
     func requestWeatherData(from coordinates: LocationCoordinates,
                         completion: @escaping ((WeatherDataModel?, RequestError?) -> Void)) {
         
         let parameters: JSONDictionary = [
             WebClientConstants.coordinatesKey.latitude: coordinates.latitude,
-            WebClientConstants.coordinatesKey.longitude: coordinates.longitude
+            WebClientConstants.coordinatesKey.longitude: coordinates.longitude,
+            WebClientConstants.appIdKey: AppSecrets.openWeatherAPIKey
         ]
         
         client.request(with: WebClientConstants.weatherPath,

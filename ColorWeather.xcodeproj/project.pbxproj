@@ -26,6 +26,8 @@
 		5EA444862383DB7D006F19B2 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA444852383DB7D006F19B2 /* PageView.swift */; };
 		5EB11BF52359BB43008B34CA /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */; };
 		5EB11BF7235E00D8008B34CA /* OSLogConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */; };
+		5EB14F422396E349001C447B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB14F412396E349001C447B /* MockURLProtocol.swift */; };
+		5EB14F442396EC8E001C447B /* WebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB14F432396EC8E001C447B /* WebServiceTests.swift */; };
 		5EB5EDEA238D872300B73716 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB5EDE9238D872300B73716 /* UIConstants.swift */; };
 		5EC9EF892330B9D3000B1621 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC9EF882330B9D3000B1621 /* AppDelegate.swift */; };
 		5EC9EF8B2330B9D3000B1621 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC9EF8A2330B9D3000B1621 /* SceneDelegate.swift */; };
@@ -35,6 +37,16 @@
 		5EC9EF952330B9D6000B1621 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EC9EF932330B9D6000B1621 /* LaunchScreen.storyboard */; };
 		5EC9EFA42330E8D3000B1621 /* AppSecrets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC9EFA32330E8D3000B1621 /* AppSecrets.generated.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5EB14F3C239581F1001C447B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EC9EF7D2330B9D3000B1621 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5EC9EF842330B9D3000B1621;
+			remoteInfo = ColorWeather;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5E003F79238EEE32004DB2A8 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
@@ -56,6 +68,10 @@
 		5EA444852383DB7D006F19B2 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
 		5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogConstants.swift; sourceTree = "<group>"; };
+		5EB14F37239581F1001C447B /* ColorWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB14F3B239581F1001C447B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EB14F412396E349001C447B /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		5EB14F432396EC8E001C447B /* WebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceTests.swift; sourceTree = "<group>"; };
 		5EB5EDE9238D872300B73716 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		5EC9EF852330B9D3000B1621 /* ColorWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EC9EF882330B9D3000B1621 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +87,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5EB14F34239581F0001C447B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EC9EF822330B9D3000B1621 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,8 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				5EB11BF9235F19FF008B34CA /* Models */,
-				5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */,
-				5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */,
 				5E49A24023576DFA0085AAC6 /* RequestError.swift */,
 				5E6A97B02334F537009B73A6 /* URL+Client.swift */,
 				5E49A23C2355E89A0085AAC6 /* WeatherDataRequestService.swift */,
@@ -148,11 +169,22 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5EB14F38239581F1001C447B /* ColorWeatherTests */ = {
+			isa = PBXGroup;
+			children = (
+				5EB14F432396EC8E001C447B /* WebServiceTests.swift */,
+				5EB14F412396E349001C447B /* MockURLProtocol.swift */,
+				5EB14F3B239581F1001C447B /* Info.plist */,
+			);
+			path = ColorWeatherTests;
+			sourceTree = "<group>";
+		};
 		5EC9EF7C2330B9D3000B1621 = {
 			isa = PBXGroup;
 			children = (
 				5EC9EF872330B9D3000B1621 /* ColorWeather */,
 				5E201EFD233212C800912772 /* Config */,
+				5EB14F38239581F1001C447B /* ColorWeatherTests */,
 				5EC9EF862330B9D3000B1621 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -161,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC9EF852330B9D3000B1621 /* ColorWeather.app */,
+				5EB14F37239581F1001C447B /* ColorWeatherTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +203,8 @@
 			children = (
 				5EC9EF882330B9D3000B1621 /* AppDelegate.swift */,
 				5EC9EFA32330E8D3000B1621 /* AppSecrets.generated.swift */,
+				5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */,
+				5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */,
 				5EC9EF8A2330B9D3000B1621 /* SceneDelegate.swift */,
 				5E003F7D238EF2CD004DB2A8 /* String+Extension.swift */,
 				5E067531237EE6B100794B7A /* UI */,
@@ -193,6 +228,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5EB14F36239581F0001C447B /* ColorWeatherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EB14F40239581F1001C447B /* Build configuration list for PBXNativeTarget "ColorWeatherTests" */;
+			buildPhases = (
+				5EB14F33239581F0001C447B /* Sources */,
+				5EB14F34239581F0001C447B /* Frameworks */,
+				5EB14F35239581F0001C447B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5EB14F3D239581F1001C447B /* PBXTargetDependency */,
+			);
+			name = ColorWeatherTests;
+			productName = ColorWeatherTests;
+			productReference = 5EB14F37239581F1001C447B /* ColorWeatherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5EC9EF842330B9D3000B1621 /* ColorWeather */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EC9EF992330B9D6000B1621 /* Build configuration list for PBXNativeTarget "ColorWeather" */;
@@ -217,10 +270,14 @@
 		5EC9EF7D2330B9D3000B1621 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "iOS MoonSand";
 				TargetAttributes = {
+					5EB14F36239581F0001C447B = {
+						CreatedOnToolsVersion = 11.2.1;
+						TestTargetID = 5EC9EF842330B9D3000B1621;
+					};
 					5EC9EF842330B9D3000B1621 = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -240,11 +297,19 @@
 			projectRoot = "";
 			targets = (
 				5EC9EF842330B9D3000B1621 /* ColorWeather */,
+				5EB14F36239581F0001C447B /* ColorWeatherTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5EB14F35239581F0001C447B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EC9EF832330B9D3000B1621 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,6 +343,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5EB14F33239581F0001C447B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EB14F442396EC8E001C447B /* WebServiceTests.swift in Sources */,
+				5EB14F422396E349001C447B /* MockURLProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EC9EF812330B9D3000B1621 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +385,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5EB14F3D239581F1001C447B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5EC9EF842330B9D3000B1621 /* ColorWeather */;
+			targetProxy = 5EB14F3C239581F1001C447B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		5EC9EF932330B9D6000B1621 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -323,6 +405,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5EB14F3E239581F1001C447B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7DNMW64ZP;
+				INFOPLIST_FILE = ColorWeatherTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosmoonsand.ColorWeatherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ColorWeather.app/ColorWeather";
+			};
+			name = Debug;
+		};
+		5EB14F3F239581F1001C447B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7DNMW64ZP;
+				INFOPLIST_FILE = ColorWeatherTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosmoonsand.ColorWeatherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ColorWeather.app/ColorWeather";
+			};
+			name = Release;
+		};
 		5EC9EF972330B9D6000B1621 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5EC9EF9E2330E110000B1621 /* Production.debug.xcconfig */;
@@ -482,6 +606,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5EB14F40239581F1001C447B /* Build configuration list for PBXNativeTarget "ColorWeatherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EB14F3E239581F1001C447B /* Debug */,
+				5EB14F3F239581F1001C447B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5EC9EF802330B9D3000B1621 /* Build configuration list for PBXProject "ColorWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
