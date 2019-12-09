@@ -17,11 +17,13 @@
 		5E201EFF2333BD1A00912772 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E201EFE2333BD1900912772 /* WeatherModel.swift */; };
 		5E201F012333C0A500912772 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E201F002333C0A500912772 /* MainModel.swift */; };
 		5E201F052333DBCB00912772 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E201F042333DBCB00912772 /* WebClient.swift */; };
+		5E3839E1239E4B7800242682 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3839E0239E4B7800242682 /* StringExtensionTests.swift */; };
+		5E3839E3239E4CF300242682 /* URLExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3839E2239E4CF300242682 /* URLExtensionTests.swift */; };
 		5E41F412238EC7DF00FB299E /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E41F411238EC7DF00FB299E /* ColorConstants.swift */; };
 		5E49A23D2355E89A0085AAC6 /* WeatherDataRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E49A23C2355E89A0085AAC6 /* WeatherDataRequestService.swift */; };
 		5E49A23F2355EDF50085AAC6 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E49A23E2355EDF50085AAC6 /* WeatherDataModel.swift */; };
 		5E49A24123576DFA0085AAC6 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E49A24023576DFA0085AAC6 /* RequestError.swift */; };
-		5E6A97B12334F537009B73A6 /* URL+Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6A97B02334F537009B73A6 /* URL+Client.swift */; };
+		5E6A97B12334F537009B73A6 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6A97B02334F537009B73A6 /* URL+Extension.swift */; };
 		5EA444842383D781006F19B2 /* RepresentedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA444832383D781006F19B2 /* RepresentedPageViewController.swift */; };
 		5EA444862383DB7D006F19B2 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA444852383DB7D006F19B2 /* PageView.swift */; };
 		5EB11BF52359BB43008B34CA /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */; };
@@ -59,11 +61,13 @@
 		5E201EFE2333BD1900912772 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		5E201F002333C0A500912772 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		5E201F042333DBCB00912772 /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
+		5E3839E0239E4B7800242682 /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
+		5E3839E2239E4CF300242682 /* URLExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionTests.swift; sourceTree = "<group>"; };
 		5E41F411238EC7DF00FB299E /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		5E49A23C2355E89A0085AAC6 /* WeatherDataRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataRequestService.swift; sourceTree = "<group>"; };
 		5E49A23E2355EDF50085AAC6 /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		5E49A24023576DFA0085AAC6 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
-		5E6A97B02334F537009B73A6 /* URL+Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Client.swift"; sourceTree = "<group>"; };
+		5E6A97B02334F537009B73A6 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		5EA444832383D781006F19B2 /* RepresentedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentedPageViewController.swift; sourceTree = "<group>"; };
 		5EA444852383DB7D006F19B2 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
@@ -147,12 +151,22 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		5E3839DD239E354300242682 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5EC9EF8E2330B9D6000B1621 /* Assets.xcassets */,
+				5EC9EF932330B9D6000B1621 /* LaunchScreen.storyboard */,
+				5EC9EF962330B9D6000B1621 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		5EB11BF8235F19CF008B34CA /* Web Service */ = {
 			isa = PBXGroup;
 			children = (
 				5EB11BF9235F19FF008B34CA /* Models */,
 				5E49A24023576DFA0085AAC6 /* RequestError.swift */,
-				5E6A97B02334F537009B73A6 /* URL+Client.swift */,
+				5E6A97B02334F537009B73A6 /* URL+Extension.swift */,
 				5E49A23C2355E89A0085AAC6 /* WeatherDataRequestService.swift */,
 				5E201F042333DBCB00912772 /* WebClient.swift */,
 			);
@@ -172,8 +186,10 @@
 		5EB14F38239581F1001C447B /* ColorWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
-				5EB14F432396EC8E001C447B /* WebServiceTests.swift */,
 				5EB14F412396E349001C447B /* MockURLProtocol.swift */,
+				5E3839E0239E4B7800242682 /* StringExtensionTests.swift */,
+				5E3839E2239E4CF300242682 /* URLExtensionTests.swift */,
+				5EB14F432396EC8E001C447B /* WebServiceTests.swift */,
 				5EB14F3B239581F1001C447B /* Info.plist */,
 			);
 			path = ColorWeatherTests;
@@ -207,11 +223,9 @@
 				5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */,
 				5EC9EF8A2330B9D3000B1621 /* SceneDelegate.swift */,
 				5E003F7D238EF2CD004DB2A8 /* String+Extension.swift */,
+				5E3839DD239E354300242682 /* Supporting Files */,
 				5E067531237EE6B100794B7A /* UI */,
 				5EB11BF8235F19CF008B34CA /* Web Service */,
-				5EC9EF8E2330B9D6000B1621 /* Assets.xcassets */,
-				5EC9EF932330B9D6000B1621 /* LaunchScreen.storyboard */,
-				5EC9EF962330B9D6000B1621 /* Info.plist */,
 				5EC9EF902330B9D6000B1621 /* Preview Content */,
 			);
 			path = ColorWeather;
@@ -348,7 +362,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EB14F442396EC8E001C447B /* WebServiceTests.swift in Sources */,
+				5E3839E3239E4CF300242682 /* URLExtensionTests.swift in Sources */,
 				5EB14F422396E349001C447B /* MockURLProtocol.swift in Sources */,
+				5E3839E1239E4B7800242682 /* StringExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +381,7 @@
 				5EA444862383DB7D006F19B2 /* PageView.swift in Sources */,
 				5E06752A237E9FA200794B7A /* CurrentWeatherView.swift in Sources */,
 				5E003F7E238EF2CD004DB2A8 /* String+Extension.swift in Sources */,
-				5E6A97B12334F537009B73A6 /* URL+Client.swift in Sources */,
+				5E6A97B12334F537009B73A6 /* URL+Extension.swift in Sources */,
 				5EA444842383D781006F19B2 /* RepresentedPageViewController.swift in Sources */,
 				5EC9EFA42330E8D3000B1621 /* AppSecrets.generated.swift in Sources */,
 				5E49A23D2355E89A0085AAC6 /* WeatherDataRequestService.swift in Sources */,
@@ -571,7 +587,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ColorWeather/Preview Content\"";
 				DEVELOPMENT_TEAM = Q7DNMW64ZP;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ColorWeather/Info.plist;
+				INFOPLIST_FILE = "ColorWeather/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -591,7 +607,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ColorWeather/Preview Content\"";
 				DEVELOPMENT_TEAM = Q7DNMW64ZP;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ColorWeather/Info.plist;
+				INFOPLIST_FILE = "ColorWeather/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
