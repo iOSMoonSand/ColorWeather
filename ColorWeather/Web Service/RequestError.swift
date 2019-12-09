@@ -10,6 +10,7 @@ import Foundation
 
 enum RequestError: Error {
     case invalidURL
+    case failedJSONSerialization
     case notConnectedToInternet
     case unknown
 }
@@ -19,6 +20,7 @@ extension RequestError: LocalizedError {
         
         switch self {
         case .invalidURL,
+             .failedJSONSerialization,
              .unknown:
             return "Oops, we're having some trouble getting your weather data. Please try again later."
             
