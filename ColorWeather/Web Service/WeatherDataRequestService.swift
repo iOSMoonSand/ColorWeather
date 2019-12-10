@@ -42,13 +42,15 @@ final class WeatherDataRequestService {
                             let weatherDictionary = weatherArray.first,
                             let weatherModel = WeatherModel(jsonDictionary: weatherDictionary),
                             let mainDictionary = dataDictionary[WebClientConstants.mainObjectKey] as? JSONDictionary,
-                            let mainModel = MainModel(jsonDictionary: mainDictionary)
+                            let mainModel = MainModel(jsonDictionary: mainDictionary),
+                            let timeOfData = dataDictionary[WebClientConstants.dtObjectKey] as? Double
                         else {
                             os_log(OSLogConstants.WebService.errorFailedDataModeling, log: .webService, type: .error)
                             return
                         }
                         
                         let weatherDataModel = WeatherDataModel(description: weatherModel.description,
+                                                                dt: timeOfData,
                                                                 icon: weatherModel.icon,
                                                                 temp: mainModel.temp,
                                                                 tempMin: mainModel.tempMin,

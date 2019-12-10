@@ -32,6 +32,7 @@ struct WebClientConstants {
     // Response Object Keys
     static let weatherObjectKey = "weather"
     static let mainObjectKey = "main"
+    static let dtObjectKey = "dt"
 }
 
 final class WebClient {

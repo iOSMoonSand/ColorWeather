@@ -1,5 +1,5 @@
 //
-//  String+Extension.swift
+//  StringProtocol+Extension.swift
 //  ColorWeather
 //
 //  Created by Alexis Schreier on 11/27/19.

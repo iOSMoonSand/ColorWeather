@@ -8,6 +8,7 @@
 
 struct WeatherDataModel {
     var description: String?
+    var dt: Double?
     var icon: String?
     var temp: Double?
     var tempMin: Double?

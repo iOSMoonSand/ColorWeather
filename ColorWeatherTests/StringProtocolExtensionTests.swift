@@ -1,5 +1,5 @@
 //
-//  StringExtensionTests.swift
+//  StringProtocolExtensionTests.swift
 //  ColorWeatherTests
 //
 //  Created by Alexis Schreier on 12/09/19.
