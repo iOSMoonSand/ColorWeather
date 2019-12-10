@@ -17,9 +17,14 @@ struct PageView<Page: View>: View {
     init(_ views: [Page]) {
         self.viewControllers = views.map {
             let controller = HostingController(rootView: $0)
+            controller.viewDidAppearHandler = {
+                guard let currentWeatherView = controller.rootView as? CurrentWeatherView else {
+                    return
+                }
+                currentWeatherView.updateViewData()
+            }
             controller.view.backgroundColor = UIColor.clear
             return controller
-            
         }
     }
     

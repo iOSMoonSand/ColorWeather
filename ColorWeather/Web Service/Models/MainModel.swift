@@ -6,7 +6,7 @@
 //  Copyright © 2019 iOS MoonSand. All rights reserved.
 //
 
-/// MainModel mirrors the JSON response obtained by calling the /weather endoint
+/// MainModel mirrors the JSON response obtained by calling the /weather endpoint
 /// (AKA Current Weather) on the OpenWeather API. MainModel includes only the properties
 /// needed for ColorWeather.
 ///

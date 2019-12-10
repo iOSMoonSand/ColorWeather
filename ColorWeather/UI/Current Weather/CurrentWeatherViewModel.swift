@@ -19,6 +19,9 @@ class CurrentWeatherViewModel: ObservableObject {
     
     // MARK: - Stateless Properties
     
+    // MARK: Public
+    var timeOfLatestData = Double()
+    
     // MARK: Private
     private let weatherDataService = WeatherDataRequestService()
     
@@ -47,11 +50,15 @@ class CurrentWeatherViewModel: ObservableObject {
                     break
                 }
                 
-                guard let data = weatherData else {
+                guard
+                    let data = weatherData,
+                    let dataTime = weatherData?.dt
+                else {
                     completion(true, RequestError.unknown)
                     return
                 }
                 DispatchQueue.main.async {
+                    self.timeOfLatestData = dataTime
                     self.weatherData = data
                 }
             }

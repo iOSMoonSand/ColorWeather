@@ -205,32 +205,6 @@ struct CurrentWeatherView: View {
                            alignment: .center)
                 
             }
-            .onAppear {
-                // TODO: Implement timer mechanism so this isn't called too frequently.
-                self.currentWeatherViewModel.requestWeatherData(with: self.city) { successRetrievingCoordinates, webRequestError in
-                    
-                    // TODO: Need to differentiate alerts shown based on error type.
-                    if !successRetrievingCoordinates {
-                        self.shouldShowErrorAlert = true
-                        return
-                    }
-                    
-                    switch webRequestError {
-                    case .some(let error) where error == RequestError.notConnectedToInternet:
-                        //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription` on the main thread.
-                        self.shouldShowErrorAlert = true
-                        return
-                        
-                    case .some(_):
-                        //TODO: Display "trouble getting data" error message in UI using `error.errorDescription` on the main thread.
-                        self.shouldShowErrorAlert = true
-                        return
-                        
-                    case .none:
-                        self.shouldShowErrorAlert = false
-                    }
-                }
-            }
             .alert(isPresented: self.$shouldShowErrorAlert) {
                 // TODO: Clean up test code.
                 Alert(title: Text("Oops!"),
@@ -239,6 +213,48 @@ struct CurrentWeatherView: View {
             }
         } // GeometryReader
     } // body
+    
+    /// Attempts to update the Current Weather data from the Open Weather Map API.
+    /// The API updates it's data no more than once every 10 min so we refresh the
+    /// data once it's more than 10 min old. All times are calculated in UTC.
+    func updateViewData() {
+    
+        let currentTime: TimeInterval = Date().timeIntervalSince1970
+        let baseTime = currentWeatherViewModel.timeOfLatestData
+        let buffer = UIConstants.CurrentWeather.refreshTimeInterval
+        
+        guard
+            Date.exceeds(baseTime: baseTime,
+                           buffer: buffer,
+                           currentTime: currentTime)
+        else {
+            return
+        }
+        
+        self.currentWeatherViewModel.requestWeatherData(with: self.city) { successRetrievingCoordinates, webRequestError in
+            
+            // TODO: Need to differentiate alerts shown based on error type.
+            if !successRetrievingCoordinates {
+                self.shouldShowErrorAlert = true
+                return
+            }
+            
+            switch webRequestError {
+            case .some(let error) where error == RequestError.notConnectedToInternet:
+                //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription` on the main thread.
+                self.shouldShowErrorAlert = true
+                return
+                
+            case .some(_):
+                //TODO: Display "trouble getting data" error message in UI using `error.errorDescription` on the main thread.
+                self.shouldShowErrorAlert = true
+                return
+                
+            case .none:
+                self.shouldShowErrorAlert = false
+            }
+        }
+    }
 }
 
 struct CurrentWeatherView_Preview: PreviewProvider {
