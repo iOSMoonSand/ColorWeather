@@ -10,11 +10,17 @@ import SwiftUI
 import UIKit
 
 /// Representation of a UIPageViewController in SwiftUI.
-struct RepresentedPageViewController: UIViewControllerRepresentable {
+final class RepresentedPageViewController: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIPageViewController
     
-    var controllers: [UIViewController]
+    private var controllers: [UIViewController]
+    private var shouldResetControllers: Bool
+    
+    init(controllers: [UIViewController], shouldResetControllers: Bool) {
+        self.controllers = controllers
+        self.shouldResetControllers = shouldResetControllers
+    }
     
     func makeCoordinator() -> RepresentedPageViewController.Coordinator {
         Coordinator(self)
@@ -34,7 +40,12 @@ struct RepresentedPageViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIPageViewController, context: UIViewControllerRepresentableContext<RepresentedPageViewController>) {
         
-        // TODO: See what this is used for.
+        if shouldResetControllers {
+            uiViewController.setViewControllers([controllers[0]],
+                                                direction: .forward,
+                                                animated: false)
+            shouldResetControllers = false
+        }
     }
     
     class Coordinator: NSObject, UIPageViewControllerDataSource {

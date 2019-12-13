@@ -10,27 +10,28 @@ import SwiftUI
 
 // TODO: Rename to something more specific.
 
-struct PageView<Page: View>: View {
+struct PageView: View {
     
-    var viewControllers: [HostingController<Page>]
+    @EnvironmentObject var cityData: CityData
     
-    init(_ views: [Page]) {
-        self.viewControllers = views.map {
+    //TODO: Need to dynamically choose background color.
+    var body: some View {
+        
+        let views: [CurrentWeatherView] = cityData.cities.map {
+            CurrentWeatherView(city: $0)
+        }
+        
+        let viewControllers: [HostingController<CurrentWeatherView>] = views.map {
             let controller = HostingController(rootView: $0)
             controller.viewDidAppearHandler = {
-                guard let currentWeatherView = controller.rootView as? CurrentWeatherView else {
-                    return
-                }
-                currentWeatherView.updateViewData()
+                controller.rootView.updateViewData()
             }
             controller.view.backgroundColor = UIColor.clear
             return controller
         }
-    }
-    
-    //TODO: Need to dynamically choose background color.
-    var body: some View {
-        RepresentedPageViewController(controllers: viewControllers)
+        
+        let representedPageVC = RepresentedPageViewController(controllers: viewControllers,
+                                                    shouldResetControllers: cityData.shouldRefreshControllers)
             .background(
                 LinearGradient(gradient: Gradient(colors:
                     [ColorConstants.Sky.Day.clearGradientStart,
@@ -39,16 +40,16 @@ struct PageView<Page: View>: View {
                                endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
         )
+        
+        cityData.shouldRefreshControllers = false
+        
+        return representedPageVC
     }
 }
 
 struct PageView_Preview: PreviewProvider {
-    
-    static let cities = ["Paris, France", "Santa Monica, CA, United States", "San Francisco, CA, United States"]
-    
+
     static var previews: some View {
-        PageView(cities.map {
-            CurrentWeatherView(city: $0)
-        })
+        PageView()
     }
 }

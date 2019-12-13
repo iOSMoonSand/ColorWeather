@@ -18,6 +18,7 @@ class HostingController<Content>: UIHostingController<Content> where Content : V
     
     // TODO: Use this method to update display when swiping instead of buggy .onAppear.
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewDidAppearHandler?()
     }
 }
