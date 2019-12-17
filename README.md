@@ -11,4 +11,11 @@ Amongst other things, [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 
 # 2. Networking
 The networking layer was done without using any third party libraries, using the good ol' `URLSession`. I created a web client to take care of creating data tasks and retrieving data received from requests. A service class was also created to interface with the client. It initiates requests specific to Open Weather Map's API and returns data that it subsequently turns into models readable by the UI layer. Without the service class, the client is a generic stand-alone object that is independent of any one specific API's endpoints.
 
+# 3. Unified Logging
+With Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) and using `OSLog` objects, I was able to create an elaborate yet performant logging system. Benefits of using this system:
+* Set different levels of log persistence: messages of hire importance get persisted to disk which allow viewing production logs, less important information is saved in memory and is more useful for a debug environment.
+* Increase your app's performance by using a native Apple library for logging rather than polluting your code with countless `print`/`NSLog` statements.
+* Supports categories to allow you to easily organize and find logs.
+* Supports emojis "❌", "🔵", "🛠" !
 
+This logging system was extremely helpful and helped me debug complex bugs that would have taken me much longer to figure out without it!
