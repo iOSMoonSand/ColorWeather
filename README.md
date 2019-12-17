@@ -25,3 +25,6 @@ When a user types to add a new city for which they want the weather, a list of s
 
 # 5. Core Location
 In order to transform human readable addresses into geographic coordinates (latitude/longitude) I used Apple's [CLGeocoder](https://developer.apple.com/documentation/corelocation/clgeocoder) which is part of the `Core Location` library. This allowed me to retrieve coordinates which were then used as parameters in my web requests to the Open Weather Map API.
+
+# 6. Unit Tests
+No app is complete without writing bug-catching unit tests! Some of the more complex test cases were the network layer tests. It can be difficult to test this layer since its code is often asynchronous and it has an important dependency: the Internet! In order to get this done I created a mock `URLProtocol`. When we create a `URLSession` to initiate web requests, the session looks for what are called protocol handlers to know how to proceed with its tasks. By creating my own, passing it to the session object and injecting the session into the client, I was able to simulate a web service success and failure with mocked data in order to test my web client without having to connect to the Internet! This also avoids having to subclass `URLSession` which is another common (more tedious IMHO) approach to network layer unit tests.
