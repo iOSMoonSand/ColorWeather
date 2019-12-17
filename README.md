@@ -13,9 +13,9 @@ The networking layer was done without using any third party libraries, using the
 
 # 3. Unified Logging
 With Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) and using `OSLog` objects, I was able to create an elaborate yet performant logging system. Benefits of using this system:
-* Set different levels of log persistence: messages of hire importance get persisted to disk which allow viewing production logs, less important information is saved in memory and is more useful for a debug environment.
+* Set different levels of log persistence: messages of higher importance get persisted to disk which allows viewing production logs, less important information is saved in memory and is more useful for debug environments.
 * Increase your app's performance by using a native Apple library for logging rather than polluting your code with countless `print`/`NSLog` statements.
 * Supports categories to allow you to easily organize and find logs.
-* Supports emojis "❌", "🔵", "🛠" !
+* Supports emojis "❌", "🔵", "🛠"!
 
 This logging system was extremely helpful and helped me debug complex bugs that would have taken me much longer to figure out without it!
