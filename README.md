@@ -19,3 +19,6 @@ With Apple's [unified logging system](https://developer.apple.com/documentation/
 * Supports emojis ❌🔵🛠!
 
 This logging system was extremely helpful and helped me debug complex bugs that would have taken me much longer to figure out without it!
+
+# 4. Search Suggestions
+When a user types to add a new city for which they want the weather, a list of suggested cities gets populated as they type. This was done with the help of Apple's [MKLocalSearchCompleter](https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter), a great library which returns suggested geographic locations from the fragments of text typed in the search bar. With SwiftUI's stateful properties, I was able to create a fluid UI that automatically regerates itself as the user types.
