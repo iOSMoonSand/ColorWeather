@@ -35,6 +35,7 @@
 		5EB14F422396E349001C447B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB14F412396E349001C447B /* MockURLProtocol.swift */; };
 		5EB14F442396EC8E001C447B /* WebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB14F432396EC8E001C447B /* WebServiceTests.swift */; };
 		5EB5EDEA238D872300B73716 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB5EDE9238D872300B73716 /* UIConstants.swift */; };
+		5EBF9C2F23A7925100209A01 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBF9C2E23A7925100209A01 /* PageController.swift */; };
 		5EC9EF892330B9D3000B1621 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC9EF882330B9D3000B1621 /* AppDelegate.swift */; };
 		5EC9EF8B2330B9D3000B1621 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC9EF8A2330B9D3000B1621 /* SceneDelegate.swift */; };
 		5EC9EF8D2330B9D3000B1621 /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC9EF8C2330B9D3000B1621 /* CitySearchView.swift */; };
@@ -85,6 +86,7 @@
 		5EB14F412396E349001C447B /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		5EB14F432396EC8E001C447B /* WebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceTests.swift; sourceTree = "<group>"; };
 		5EB5EDE9238D872300B73716 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		5EBF9C2E23A7925100209A01 /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		5EC9EF852330B9D3000B1621 /* ColorWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EC9EF882330B9D3000B1621 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EC9EF8A2330B9D3000B1621 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		5E067531237EE6B100794B7A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5EBF9C2123A779D300209A01 /* Pages */,
 				5E06752F237EE58700794B7A /* RepresentedTextField.swift */,
 				5EA444832383D781006F19B2 /* RepresentedPageViewController.swift */,
 				5E06752D237EDA5500794B7A /* UIKitTextField.swift */,
@@ -146,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				5EA444852383DB7D006F19B2 /* PageView.swift */,
+				5EBF9C2E23A7925100209A01 /* PageController.swift */,
 				5E067529237E9FA200794B7A /* CurrentWeatherView.swift */,
 				5E06752B237EA71800794B7A /* CurrentWeatherViewModel.swift */,
 			);
@@ -211,6 +215,13 @@
 				5EB14F3B239581F1001C447B /* Info.plist */,
 			);
 			path = ColorWeatherTests;
+			sourceTree = "<group>";
+		};
+		5EBF9C2123A779D300209A01 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 		5EC9EF7C2330B9D3000B1621 = {
@@ -417,6 +428,7 @@
 				5EB5EDEA238D872300B73716 /* UIConstants.swift in Sources */,
 				5E49A23F2355EDF50085AAC6 /* WeatherDataModel.swift in Sources */,
 				5EC9EF8D2330B9D3000B1621 /* CitySearchView.swift in Sources */,
+				5EBF9C2F23A7925100209A01 /* PageController.swift in Sources */,
 				5E06752C237EA71800794B7A /* CurrentWeatherViewModel.swift in Sources */,
 				5E201F012333C0A500912772 /* MainModel.swift in Sources */,
 				5E201EFF2333BD1A00912772 /* WeatherModel.swift in Sources */,

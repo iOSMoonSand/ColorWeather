@@ -26,7 +26,6 @@ struct CitySuggestionsListView: View {
                 Text(suggestion)
                     .onTapGesture {
                         self.cityData.cities.append(suggestion)
-                        self.cityData.shouldRefreshControllers = true
                         self.isPresented = false
                 }
             }

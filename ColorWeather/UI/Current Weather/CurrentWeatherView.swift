@@ -29,7 +29,6 @@ struct CurrentWeatherView: View {
     
     // MARK: Private
     @State private var shouldShowErrorAlert = false
-    @State private var shouldShowDetailView = false
     
     // MARK: - Stateless Properties
     
@@ -45,37 +44,8 @@ struct CurrentWeatherView: View {
                 
                 Spacer()
                     .frame(width: 0,
-                           height: 20,
+                           height: 30,
                            alignment: .center)
-                
-                HStack {
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        // TODO: Implement button action.
-                        self.shouldShowDetailView.toggle()
-                    }) {
-                        Image(UIConstants.Shared.Assets.menu)
-                            .resizable()
-                            .renderingMode(.original)
-                    }
-                    .sheet(isPresented: self.$shouldShowDetailView) {
-                        CitySearchView(isPresented: self.$shouldShowDetailView)
-                            .environmentObject(self.cityData)
-                    }
-                    .frame(width: 25,
-                           height: 25,
-                           alignment: .center)
-                        .shadow(radius: 3)
-                        .opacity(0.85)
-                    
-                    
-                    Spacer()
-                        .frame(width: 30,
-                               height: 0,
-                               alignment: .center)
-                }
                 
                 
                 Group {

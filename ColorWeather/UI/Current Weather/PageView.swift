@@ -13,37 +13,50 @@ import SwiftUI
 struct PageView: View {
     
     @EnvironmentObject var cityData: CityData
+    @State var index = 0
+    @State private var shouldShowDetailView = false
     
     //TODO: Need to dynamically choose background color.
     var body: some View {
         
-        let views: [CurrentWeatherView] = cityData.cities.map {
-            CurrentWeatherView(city: $0)
-        }
-        
-        let viewControllers: [HostingController<CurrentWeatherView>] = views.map {
-            let controller = HostingController(rootView: $0)
-            controller.viewDidAppearHandler = {
-                controller.rootView.updateViewData()
+        ZStack {
+            PageController(cityData.cities,
+                           currentPage: $index) { index, city in
+                           CurrentWeatherView(city: city)
             }
-            controller.view.backgroundColor = UIColor.clear
-            return controller
+            
+            VStack {
+                HStack {
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                                        // TODO: Implement button action.
+                                        self.shouldShowDetailView.toggle()
+                                    }) {
+                                        Image(UIConstants.Shared.Assets.menu)
+                                            .resizable()
+                                            .renderingMode(.original)
+                                    }
+                                    .sheet(isPresented: self.$shouldShowDetailView) {
+                                        CitySearchView(isPresented: self.$shouldShowDetailView)
+                                            .environmentObject(self.cityData)
+                                    }
+                                    .frame(width: 25,
+                                           height: 25,
+                                           alignment: .center)
+                                        .shadow(radius: 3)
+                                        .opacity(0.85)
+                                    .padding(EdgeInsets(top: 10,
+                                                        leading: 0,
+                                                        bottom: 0,
+                                                        trailing: 20))
+                }
+                
+                Spacer()
+            }
+            
         }
-        
-        let representedPageVC = RepresentedPageViewController(controllers: viewControllers,
-                                                    shouldResetControllers: cityData.shouldRefreshControllers)
-            .background(
-                LinearGradient(gradient: Gradient(colors:
-                    [ColorConstants.Sky.Day.clearGradientStart,
-                     ColorConstants.Sky.Day.clearGradientEnd]),
-                               startPoint: .top,
-                               endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-        )
-        
-        cityData.shouldRefreshControllers = false
-        
-        return representedPageVC
     }
 }
 

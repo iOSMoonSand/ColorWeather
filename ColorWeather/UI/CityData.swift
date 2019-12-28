@@ -12,9 +12,6 @@ class CityData: ObservableObject {
     
     @Published var cities: [String]
     
-    var shouldRefreshControllers: Bool = false
-    
-    
     init(cities: [String]) {
         self.cities = cities
     }

@@ -10,78 +10,70 @@ import SwiftUI
 import UIKit
 
 /// Representation of a UIPageViewController in SwiftUI.
-final class RepresentedPageViewController: UIViewControllerRepresentable {
+struct RepresentedPageViewController: UIViewControllerRepresentable {
     
-    typealias UIViewControllerType = UIPageViewController
+    @Binding var currentPage: Int
     
-    private var controllers: [UIViewController]
-    private var shouldResetControllers: Bool
+    var controllers: [UIViewController]
+    var coordinator: PagesCoordinator?
     
-    init(controllers: [UIViewController], shouldResetControllers: Bool) {
-        self.controllers = controllers
-        self.shouldResetControllers = shouldResetControllers
-    }
-    
-    func makeCoordinator() -> RepresentedPageViewController.Coordinator {
-        Coordinator(self)
-    }
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<RepresentedPageViewController>) -> RepresentedPageViewController.UIViewControllerType {
+    func makeUIViewController(context: Context) -> UIPageViewController {
         
-        let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        pageViewController.dataSource = context.coordinator
-        
-        pageViewController.setViewControllers([controllers[0]],
-                                              direction: .forward,
-                                              animated: false)
+        let pageViewController = UIPageViewController(transitionStyle: .scroll,
+                                                      navigationOrientation: .horizontal)
+        pageViewController.dataSource = coordinator
+        pageViewController.delegate = coordinator
+        pageViewController.view.backgroundColor = .clear
         
         return pageViewController
     }
     
-    func updateUIViewController(_ uiViewController: UIPageViewController, context: UIViewControllerRepresentableContext<RepresentedPageViewController>) {
+    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         
-        if shouldResetControllers {
-            uiViewController.setViewControllers([controllers[0]],
-                                                direction: .forward,
-                                                animated: false)
-            shouldResetControllers = false
-        }
+        pageViewController.dataSource = coordinator
+        pageViewController.delegate = coordinator
+        
+        pageViewController.setViewControllers([controllers[currentPage]],
+                                              direction: .forward,
+                                              animated: false)
+    }
+}
+
+
+class PagesCoordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+    var parent: RepresentedPageViewController
+    
+    init(_ pageViewController: RepresentedPageViewController) {
+        self.parent = pageViewController
     }
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    // MARK: UIPageViewControllerDataSource Methods
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        var parent: RepresentedPageViewController
-        
-        init(_ pageViewController: RepresentedPageViewController) {
-            self.parent = pageViewController
+        guard let index = parent.controllers.firstIndex(of: viewController) else {
+            return nil
         }
         
-        // MARK: UIPageViewControllerDataSource Methods
+        return index == 0 ? nil : parent.controllers[index - 1]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-            
-            guard let index = parent.controllers.firstIndex(of: viewController) else {
-                return nil
-            }
-            
-            if index == 0 {
-                return parent.controllers.last
-            }
-            
-            return parent.controllers[index - 1]
+        guard let index = parent.controllers.firstIndex(of: viewController) else {
+            return nil
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-            
-            guard let index = parent.controllers.firstIndex(of: viewController) else {
-                return nil
-            }
-            
-            if index + 1 == parent.controllers.count {
-                return parent.controllers.first
-            }
-            
-            return parent.controllers[index + 1]
+        return index == parent.controllers.count - 1 ? nil : parent.controllers[index + 1]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if
+            completed,
+            let visibleViewController = pageViewController.viewControllers?.first,
+            let index = parent.controllers.firstIndex(of: visibleViewController) {
+            parent.currentPage = index
         }
     }
 }
