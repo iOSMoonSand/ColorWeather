@@ -24,6 +24,7 @@ struct CurrentWeatherView: View {
     // MARK: - Stateful Properties
     
     // MARK: Public
+    @EnvironmentObject var cityData: CityData
     @ObservedObject var currentWeatherViewModel = CurrentWeatherViewModel()
     
     // MARK: Private
@@ -43,32 +44,8 @@ struct CurrentWeatherView: View {
                 
                 Spacer()
                     .frame(width: 0,
-                           height: 20,
+                           height: 30,
                            alignment: .center)
-                
-                HStack {
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        // TODO: Implement button action.
-                        print("***BUTTON TAPPED***")
-                    }) {
-                        Image(UIConstants.Shared.Assets.menu)
-                            .resizable()
-                            .renderingMode(.original)
-                    }
-                    .frame(width: 25,
-                           height: 25,
-                           alignment: .center)
-                        .shadow(radius: 3)
-                        .opacity(0.85)
-                    
-                    Spacer()
-                        .frame(width: 30,
-                               height: 0,
-                               alignment: .center)
-                }
                 
                 
                 Group {
@@ -214,21 +191,22 @@ struct CurrentWeatherView: View {
         } // GeometryReader
     } // body
     
+    
     /// Attempts to update the Current Weather data from the Open Weather Map API.
     /// The API updates it's data no more than once every 10 min so we refresh the
     /// data once it's more than 10 min old. All times are calculated in UTC.
     func updateViewData() {
-    
+        
         let currentTime: TimeInterval = Date().timeIntervalSince1970
         let baseTime = currentWeatherViewModel.timeOfLatestData
         let buffer = UIConstants.CurrentWeather.refreshTimeInterval
         
         guard
             Date.exceeds(baseTime: baseTime,
-                           buffer: buffer,
-                           currentTime: currentTime)
-        else {
-            return
+                         buffer: buffer,
+                         currentTime: currentTime)
+            else {
+                return
         }
         
         self.currentWeatherViewModel.requestWeatherData(with: self.city) { successRetrievingCoordinates, webRequestError in

@@ -10,6 +10,11 @@ import SwiftUI
 
 struct ColorConstants {
     
+    static let defaultBackground = UIColor(red: 248/255,
+                                           green: 252/255,
+                                           blue: 252/255,
+                                           alpha: 1/1)
+    
     // MARK: - Sky
     struct Sky {
         
