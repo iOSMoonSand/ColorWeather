@@ -13,7 +13,7 @@ struct RepresentedTextField: UIViewRepresentable {
     // MARK: - Stateful Properties
     
     // MARK: Public
-    @Binding var text: String
+    @Binding var isEditing: Bool
     
     // MARK: - Stateless Properties
     
@@ -35,6 +35,8 @@ struct RepresentedTextField: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<RepresentedTextField>) {
-        // TODO: Not firing for changes in text field text. Is this a bug?
+        if !isEditing {
+            UIApplication.shared.endEditing()
+        }
     }
 }

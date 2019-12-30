@@ -15,6 +15,14 @@ struct ColorConstants {
                                            blue: 252/255,
                                            alpha: 1/1)
     
+    static let settingsGradientStart = Color(red: 0/255,
+                                          green: 113/255,
+                                          blue: 255/255)
+    
+    static let settingsGradientEnd = Color(red: 164/255,
+                                        green: 203/255,
+                                        blue: 253/255)
+    
     // MARK: - Sky
     struct Sky {
         
