@@ -10,6 +10,8 @@ struct WeatherDataModel {
     var description: String?
     var dt: Double?
     var icon: String?
+    var sunrise: String?
+    var sunset: String?
     var temp: Double?
     var tempMin: Double?
     var tempMax: Double?

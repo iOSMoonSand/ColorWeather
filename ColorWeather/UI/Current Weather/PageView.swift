@@ -12,6 +12,7 @@ import SwiftUI
 
 struct PageView: View {
     
+    @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var cityData: CityData
     @State var index = 0
     @State private var shouldShowDetailView = false
@@ -41,6 +42,7 @@ struct PageView: View {
                                     .sheet(isPresented: self.$shouldShowDetailView) {
                                         CitySearchView(isPresented: self.$shouldShowDetailView)
                                             .environmentObject(self.cityData)
+                                            .environmentObject(self.userSettings)
                                     }
                                     .frame(width: 25,
                                            height: 25,

@@ -43,20 +43,37 @@ final class WeatherDataRequestService {
                             let weatherModel = WeatherModel(jsonDictionary: weatherDictionary),
                             let mainDictionary = dataDictionary[WebClientConstants.mainObjectKey] as? JSONDictionary,
                             let mainModel = MainModel(jsonDictionary: mainDictionary),
-                            let timeOfData = dataDictionary[WebClientConstants.dtObjectKey] as? Double
+                            let sysDictionary = dataDictionary[WebClientConstants.sysObjectKey] as? JSONDictionary,
+                            let sysModel = SysModel(jsonDictionary: sysDictionary),
+                            let sunriseTimestamp = sysModel.sunrise,
+                            let sunsetTimestamp = sysModel.sunset,
+                            let timeOfData = dataDictionary[WebClientConstants.dtObjectKey] as? Double,
+                            let timezone = dataDictionary[WebClientConstants.timezoneObjectKey] as? Double
                         else {
                             os_log(OSLogConstants.WebService.errorFailedDataModeling, log: .webService, type: .error)
                             return
                         }
                         
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+                        dateFormatter.locale = NSLocale.current
+                        dateFormatter.dateFormat = "h:mm a"
+                        
+                        let sunriseDate = Date(timeIntervalSince1970: sunriseTimestamp + timezone)
+                        let sunriseStringDate = dateFormatter.string(from: sunriseDate)
+                        
+                        let sunsetDate = Date(timeIntervalSince1970: sunsetTimestamp + timezone)
+                        let sunsetStringDate = dateFormatter.string(from: sunsetDate)
+                        
                         let weatherDataModel = WeatherDataModel(description: weatherModel.description,
                                                                 dt: timeOfData,
                                                                 icon: weatherModel.icon,
+                                                                sunrise: sunriseStringDate,
+                                                                sunset: sunsetStringDate,
                                                                 temp: mainModel.temp,
                                                                 tempMin: mainModel.tempMin,
                                                                 tempMax: mainModel.tempMax)
                         
-                        //TODO: Display results in UI on the main thread.
                         completion(weatherDataModel, nil)
         })
     }

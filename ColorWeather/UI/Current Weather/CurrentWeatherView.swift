@@ -24,6 +24,7 @@ struct CurrentWeatherView: View {
     // MARK: - Stateful Properties
     
     // MARK: Public
+    @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var cityData: CityData
     @ObservedObject var currentWeatherViewModel = CurrentWeatherViewModel()
     
@@ -38,7 +39,46 @@ struct CurrentWeatherView: View {
     // MARK: - View Body
     var body: some View {
         
-        GeometryReader { container in
+        var firstForecastObject = TriHourlyForecastDataModel()
+        var secondForecastObject = TriHourlyForecastDataModel()
+        var thirdForecastObject = TriHourlyForecastDataModel()
+        
+        if !currentWeatherViewModel.triHourlyForecastDataModels.isEmpty {
+            firstForecastObject = currentWeatherViewModel.triHourlyForecastDataModels[0]
+            secondForecastObject = currentWeatherViewModel.triHourlyForecastDataModels[1]
+            thirdForecastObject = currentWeatherViewModel.triHourlyForecastDataModels[2]
+        }
+        
+        let unit: UnitTemperature = userSettings.unitsInFahrenheit ? .fahrenheit : .celsius
+        let currentTemperature = Utilities.convert(temperature: currentWeatherViewModel.weatherData.temp ?? 0,
+                                                   from: .kelvin,
+                                                   to: unit)
+        let currentLow = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMin ?? 0,
+                                           from: .kelvin,
+                                           to: unit)
+        let currentHigh = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMax ?? 0,
+                                            from: .kelvin,
+                                            to: unit)
+        let firstForecastObjectLow = Utilities.convert(temperature: firstForecastObject.tempMin ?? 0,
+        from: .kelvin,
+        to: unit)
+        let firstForecastObjectHigh = Utilities.convert(temperature: firstForecastObject.tempMax ?? 0,
+        from: .kelvin,
+        to: unit)
+        let secondForecastObjectLow = Utilities.convert(temperature: secondForecastObject.tempMin ?? 0,
+        from: .kelvin,
+        to: unit)
+        let secondForecastObjectHigh = Utilities.convert(temperature: secondForecastObject.tempMax ?? 0,
+        from: .kelvin,
+        to: unit)
+        let thirdForecastObjectLow = Utilities.convert(temperature: thirdForecastObject.tempMin ?? 0,
+        from: .kelvin,
+        to: unit)
+        let thirdForecastObjectHigh = Utilities.convert(temperature: thirdForecastObject.tempMax ?? 0,
+        from: .kelvin,
+        to: unit)
+        
+        let geometryReader = GeometryReader { container in
             
             VStack {
                 
@@ -74,7 +114,7 @@ struct CurrentWeatherView: View {
                 
                 VStack {
                     
-                    Text(String(format: "%.2f", self.currentWeatherViewModel.weatherData.temp ?? 0.0))
+                    Text(currentTemperature)
                         .font(.system(size: 100))
                         .fontWeight(.ultraLight)
                         .foregroundColor(Color.gray)
@@ -95,8 +135,7 @@ struct CurrentWeatherView: View {
                                     .fontWeight(.thin)
                                     .foregroundColor(Color.gray)
                                 
-                                //TODO: Implement temperature conversion mechanism.
-                                Text(String(format: "%.2f", self.currentWeatherViewModel.weatherData.tempMin ?? 0.0))
+                                Text(currentLow)
                                     .font(.system(size: 30))
                                     .foregroundColor(Color.gray)
                             }
@@ -111,8 +150,7 @@ struct CurrentWeatherView: View {
                                 .fontWeight(.thin)
                                 .foregroundColor(Color.gray)
                             
-                            // TODO: Use actual server data.
-                            Text("6:47 AM")
+                            Text("\(self.currentWeatherViewModel.weatherData.sunrise ?? Constants.noDataDefault)")
                                 .font(.system(size: 24))
                                 .foregroundColor(Color.gray)
                         }
@@ -129,8 +167,7 @@ struct CurrentWeatherView: View {
                                     .fontWeight(.thin)
                                     .foregroundColor(Color.gray)
                                 
-                                //TODO: Implement temperature conversion mechanism.
-                                Text(String(format: "%.2f", self.currentWeatherViewModel.weatherData.tempMax ?? 0.0))
+                                Text(currentHigh)
                                     .font(.system(size: 30))
                                     .foregroundColor(Color.gray)
                             }
@@ -146,7 +183,7 @@ struct CurrentWeatherView: View {
                                 .foregroundColor(Color.gray)
                             
                             // TODO: Use actual server data.
-                            Text("7:39 PM")
+                            Text("\(self.currentWeatherViewModel.weatherData.sunset ?? Constants.noDataDefault)")
                                 .font(.system(size: 24))
                                 .foregroundColor(Color.gray)
                         }
@@ -157,17 +194,74 @@ struct CurrentWeatherView: View {
                                height: 30,
                                alignment: .center)
                     
-                    // TODO: Use actual server data.
-                    Group {
-                        Divider()
-                        Text("This is the forecast.")
-                            .foregroundColor(Color.gray)
-                        Divider()
-                        Text("This is the forecast.")
-                            .foregroundColor(Color.gray)
-                        Divider()
-                        Text("This is the forecast.")
-                            .foregroundColor(Color.gray)
+                    // TODO filter server calls
+                    if !self.currentWeatherViewModel.triHourlyForecastDataModels.isEmpty {
+                        Group {
+                            Divider()
+                            HStack(spacing: 16) {
+                                Text("\(firstForecastObject.forecastTime ?? Constants.noDataDefault)")
+                                    .foregroundColor(Color.gray)
+                                Text("\(firstForecastObject.icon!)")
+                                    .foregroundColor(Color.gray)
+                                HStack {
+                                    HStack(spacing: 3) {
+                                        Text(Constants.lowTempSymbol)
+                                            .foregroundColor(Color.gray)
+                                        Text(firstForecastObjectLow)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                    HStack(spacing: 3) {
+                                        Text(Constants.highTempSymbol)
+                                            .foregroundColor(Color.gray)
+                                        Text(firstForecastObjectHigh)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                }
+                            }
+                            
+                            Divider()
+                            HStack(spacing: 16) {
+                                Text("\(secondForecastObject.forecastTime ?? "--")")
+                                    .foregroundColor(Color.gray)
+                                Text("\(secondForecastObject.icon!)")
+                                    .foregroundColor(Color.gray)
+                                HStack {
+                                    HStack(spacing: 3) {
+                                        Text(Constants.lowTempSymbol)
+                                            .foregroundColor(Color.gray)
+                                        Text(secondForecastObjectLow)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                    HStack(spacing: 3) {
+                                        Text(Constants.highTempSymbol)
+                                            .foregroundColor(Color.gray)
+                                        Text(secondForecastObjectHigh)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                }
+                            }
+                            Divider()
+                            HStack(spacing: 16) {
+                                Text("\(thirdForecastObject.forecastTime ?? "--")")
+                                    .foregroundColor(Color.gray)
+                                Text("\(thirdForecastObject.icon!)")
+                                    .foregroundColor(Color.gray)
+                                HStack {
+                                    HStack(spacing: 3) {
+                                        Text(Constants.lowTempSymbol)
+                                            .foregroundColor(Color.gray)
+                                        Text(thirdForecastObjectLow)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                    HStack(spacing: 3) {
+                                        Text(Constants.highTempSymbol)
+                                            .foregroundColor(Color.gray)
+                                        Text(thirdForecastObjectHigh)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 .frame(width: container.size.width - 40, height: container.size.height * 0.5, alignment: .center)
@@ -189,16 +283,17 @@ struct CurrentWeatherView: View {
                       dismissButton: .default(Text("OK")))
             }
         } // GeometryReader
+        return geometryReader
     } // body
     
     
-    /// Attempts to update the Current Weather data from the Open Weather Map API.
+    /// Attempts to update the Current Weather and 3 Hour Forecast data from the Open Weather Map API.
     /// The API updates it's data no more than once every 10 min so we refresh the
     /// data once it's more than 10 min old. All times are calculated in UTC.
     func updateViewData() {
         
         let currentTime: TimeInterval = Date().timeIntervalSince1970
-        let baseTime = currentWeatherViewModel.timeOfLatestData
+        let baseTime = currentWeatherViewModel.timeOfLatestCurrentWeatherData
         let buffer = UIConstants.CurrentWeather.refreshTimeInterval
         
         guard
@@ -207,6 +302,30 @@ struct CurrentWeatherView: View {
                          currentTime: currentTime)
             else {
                 return
+        }
+        
+        self.currentWeatherViewModel.requestTriHourlyForecastData(with: self.city) { successRetrievingCoordinates, webRequestError in
+            
+            // TODO: Need to differentiate alerts shown based on error type.
+            if !successRetrievingCoordinates {
+                self.shouldShowErrorAlert = true
+                return
+            }
+            
+            switch webRequestError {
+            case .some(let error) where error == RequestError.notConnectedToInternet:
+                //TODO: Display notConnectedToInternet error message in UI using `error.errorDescription` on the main thread.
+                self.shouldShowErrorAlert = true
+                return
+                
+            case .some(_):
+                //TODO: Display "trouble getting data" error message in UI using `error.errorDescription` on the main thread.
+                self.shouldShowErrorAlert = true
+                return
+                
+            case .none:
+                self.shouldShowErrorAlert = false
+            }
         }
         
         self.currentWeatherViewModel.requestWeatherData(with: self.city) { successRetrievingCoordinates, webRequestError in

@@ -16,14 +16,16 @@ class CurrentWeatherViewModel: ObservableObject {
     
     // MARK: Public
     @Published var weatherData = WeatherDataModel()
+    @Published var triHourlyForecastDataModels = [TriHourlyForecastDataModel]()
     
     // MARK: - Stateless Properties
     
     // MARK: Public
-    var timeOfLatestData = Double()
+    var timeOfLatestCurrentWeatherData = Double()
     
     // MARK: Private
     private let weatherDataService = WeatherDataRequestService()
+    private let triHourlyForecastService = TriHourlyForecastRequestService()
     
     // MARK: - Public Methods
     
@@ -58,8 +60,42 @@ class CurrentWeatherViewModel: ObservableObject {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.timeOfLatestData = dataTime
+                    self.timeOfLatestCurrentWeatherData = dataTime
                     self.weatherData = data
+                }
+            }
+        }
+    }
+    
+    /// Gets the geographic coordinates (latitude and longitude) from a user-readable address and initiates a request from the weather data service. Upon success, the method sets the view model's weatherData object which will subsequently be used to update the UI.
+    /// - Parameter location: The user-readable address.
+    /// - Parameter completion: Completion Handler returning a boolean indicating the success or failure of the geocoder and an error in case of a web request failure.
+    func requestTriHourlyForecastData(with location: String, completion: @escaping ((Bool, RequestError?) -> Void)) {
+        
+        getCoordinates(from: location) { coordinates in
+            
+            guard let coordinates = coordinates else {
+                completion(false, nil)
+                return
+            }
+            
+            self.triHourlyForecastService.requestForecastData(from: coordinates) { forecastDataModels, error in
+                
+                switch error {
+                case .some(_):
+                    completion(true, error)
+                    
+                case .none:
+                    break
+                }
+                
+                guard let dataModels = forecastDataModels else {
+                    completion(true, RequestError.unknown)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.triHourlyForecastDataModels = dataModels.compactMap { $0 }
                 }
             }
         }
