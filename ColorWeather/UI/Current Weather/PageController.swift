@@ -11,8 +11,8 @@ import SwiftUI
 struct PageController<Data, Content>: View where Data: RandomAccessCollection, Content: View {
     
     @Binding var currentPage: Int
-    var items: [Data.Element]
     
+    private var items: [Data.Element]
     private var template: (Int, Data.Element) -> Content
     
     init(_ items: Data, currentPage: Binding<Int>, template: @escaping (Int, Data.Element) -> Content) {

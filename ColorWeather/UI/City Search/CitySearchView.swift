@@ -13,13 +13,13 @@ struct CitySearchView: View {
     // MARK: - Stateful Properties
     
     // MARK: Public
+    @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var cityData: CityData
     @ObservedObject var searchCompleter = CitySearchCompleter()
     @Binding var isPresented: Bool
     
     // MARK: Private
     @State private var isSearching = false
-    @State private var farenheitUnits = true
     
     // MARK: - View Body
     var body: some View {
@@ -123,8 +123,8 @@ struct CitySearchView: View {
                         .font(.system(size: 14, weight: .medium))
                     ) {
                         HStack {
-                            if farenheitUnits {
-                                Text("Temperature units are now in Farenheit.")
+                            if userSettings.unitsInFahrenheit {
+                                Text("Temperature units are now in Fahrenheit.")
                                 .foregroundColor(Color(red: 64/255,
                                                        green: 64/255,
                                                        blue: 64/255))
@@ -139,12 +139,9 @@ struct CitySearchView: View {
                                 .padding([.top, .bottom], 10)
                             }
                             
-                            
-                            Toggle(isOn: $farenheitUnits) {
-                                Text("")
-                            }.padding()
+                            Toggle("", isOn: $userSettings.unitsInFahrenheit)
+                                .padding()
                         }
-                        
                     }
                 }
                 .onAppear() {

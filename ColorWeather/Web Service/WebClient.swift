@@ -28,11 +28,15 @@ struct WebClientConstants {
     // URL Components
     static let baseURLString = "https://api.openweathermap.org/data/2.5"
     static let weatherPath = "/weather"
+    static let triHourlyForecastPath = "/forecast"
     
     // Response Object Keys
     static let weatherObjectKey = "weather"
     static let mainObjectKey = "main"
     static let dtObjectKey = "dt"
+    static let listObjectKey = "list"
+    static let sysObjectKey = "sys"
+    static let timezoneObjectKey = "timezone"
 }
 
 final class WebClient {
