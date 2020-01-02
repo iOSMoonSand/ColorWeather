@@ -125,18 +125,18 @@ struct CitySearchView: View {
                         HStack {
                             if userSettings.unitsInFahrenheit {
                                 Text("Temperature units are now in Fahrenheit.")
-                                .foregroundColor(Color(red: 64/255,
-                                                       green: 64/255,
-                                                       blue: 64/255))
-                                .padding([.leading], 10)
-                                .padding([.top, .bottom], 10)
+                                    .foregroundColor(Color(red: 64/255,
+                                                           green: 64/255,
+                                                           blue: 64/255))
+                                    .padding([.leading], 10)
+                                    .padding([.top, .bottom], 10)
                             } else {
                                 Text("Temperature units are now in Celcius.")
-                                .foregroundColor(Color(red: 64/255,
-                                                       green: 64/255,
-                                                       blue: 64/255))
-                                .padding([.leading], 10)
-                                .padding([.top, .bottom], 10)
+                                    .foregroundColor(Color(red: 64/255,
+                                                           green: 64/255,
+                                                           blue: 64/255))
+                                    .padding([.leading], 10)
+                                    .padding([.top, .bottom], 10)
                             }
                             
                             Toggle("", isOn: $userSettings.unitsInFahrenheit)
@@ -168,8 +168,12 @@ struct CitySearchView: View {
     
     func deleteItems(at offsets: IndexSet) {
         
-        if currentPage == userSettings.cities.count - 1 {
-            currentPage = userSettings.cities.count - 2
+        let count = userSettings.cities.count
+        
+        if
+            currentPage == count - 1,
+            count >= 1 {
+            currentPage = count == 1 ? count - 1 : count - 2
         }
         
         userSettings.cities.remove(atOffsets: offsets)

@@ -20,9 +20,19 @@ struct PageView: View {
     var body: some View {
         
         ZStack {
-            PageController(userSettings.cities,
-                           currentPage: $index) { index, city in
-                           CurrentWeatherView(city: city)
+            
+            if !userSettings.cities.isEmpty {
+                PageController(userSettings.cities,
+                               currentPage: $index) { index, city in
+                                CurrentWeatherView(city: city)
+                }
+            } else {
+                Button(action: {
+                    self.shouldShowDetailView.toggle()
+                }) {
+                    Text("Tap to add a new city.")
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                }
             }
             
             VStack {
@@ -31,25 +41,25 @@ struct PageView: View {
                     Spacer()
                     
                     Button(action: {
-                                        self.shouldShowDetailView.toggle()
-                                    }) {
-                                        Image(UIConstants.Shared.Assets.menu)
-                                            .resizable()
-                                            .renderingMode(.original)
-                                    }
-                                    .sheet(isPresented: self.$shouldShowDetailView) {
-                                        CitySearchView(isPresented: self.$shouldShowDetailView, currentPage: self.$index)
-                                            .environmentObject(self.userSettings)
-                                    }
-                                    .frame(width: 25,
-                                           height: 25,
-                                           alignment: .center)
-                                        .shadow(radius: 3)
-                                        .opacity(0.85)
-                                    .padding(EdgeInsets(top: 10,
-                                                        leading: 0,
-                                                        bottom: 0,
-                                                        trailing: 20))
+                        self.shouldShowDetailView.toggle()
+                    }) {
+                        Image(UIConstants.Shared.Assets.menu)
+                            .resizable()
+                            .renderingMode(.original)
+                    }
+                    .sheet(isPresented: self.$shouldShowDetailView) {
+                        CitySearchView(isPresented: self.$shouldShowDetailView, currentPage: self.$index)
+                            .environmentObject(self.userSettings)
+                    }
+                    .frame(width: 25,
+                           height: 25,
+                           alignment: .center)
+                        .shadow(radius: 3)
+                        .opacity(0.85)
+                        .padding(EdgeInsets(top: 10,
+                                            leading: 0,
+                                            bottom: 0,
+                                            trailing: 20))
                 }
                 
                 Spacer()
@@ -59,7 +69,7 @@ struct PageView: View {
 }
 
 struct PageView_Preview: PreviewProvider {
-
+    
     static var previews: some View {
         PageView()
     }
