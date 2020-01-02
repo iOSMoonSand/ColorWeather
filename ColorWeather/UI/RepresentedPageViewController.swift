@@ -13,6 +13,7 @@ import UIKit
 struct RepresentedPageViewController: UIViewControllerRepresentable {
     
     @Binding var currentPage: Int
+    @EnvironmentObject var userSettings: UserSettings
     
     var controllers: [UIViewController]
     var coordinator: PagesCoordinator?
@@ -30,12 +31,15 @@ struct RepresentedPageViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         
-        pageViewController.dataSource = coordinator
-        pageViewController.delegate = coordinator
-        
-        pageViewController.setViewControllers([controllers[currentPage]],
-                                              direction: .forward,
-                                              animated: false)
+        if !userSettings.cities.isEmpty {
+            
+            pageViewController.dataSource = coordinator
+            pageViewController.delegate = coordinator
+            
+            pageViewController.setViewControllers([controllers[currentPage]],
+            direction: .forward,
+            animated: false)
+        }
     }
 }
 
