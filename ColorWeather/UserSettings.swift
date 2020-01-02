@@ -19,4 +19,12 @@ final class UserSettings: ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    // TODO: Replace default values with empty state.
+    @UserDefault("Cities", defaultValue: ["Paris, France"])
+    var cities: [String] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
 }
