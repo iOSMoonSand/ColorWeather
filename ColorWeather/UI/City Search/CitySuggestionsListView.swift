@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CitySuggestionsListView: View {
     
-    @EnvironmentObject var cityData: CityData
+    @EnvironmentObject var userSettings: UserSettings
     @Binding var isPresented: Bool
     
     private var suggestions: [String]
@@ -25,7 +25,7 @@ struct CitySuggestionsListView: View {
             ForEach(suggestions, id: \.self) { suggestion in
                 Text(suggestion)
                     .onTapGesture {
-                        self.cityData.cities.append(suggestion)
+                        self.userSettings.cities.append(suggestion)
                         self.isPresented = false
                 }
             }

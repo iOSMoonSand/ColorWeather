@@ -25,7 +25,6 @@ struct CurrentWeatherView: View {
     
     // MARK: Public
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var cityData: CityData
     @ObservedObject var currentWeatherViewModel = CurrentWeatherViewModel()
     
     // MARK: Private

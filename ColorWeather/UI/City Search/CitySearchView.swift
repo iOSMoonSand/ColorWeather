@@ -14,9 +14,9 @@ struct CitySearchView: View {
     
     // MARK: Public
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var cityData: CityData
     @ObservedObject var searchCompleter = CitySearchCompleter()
     @Binding var isPresented: Bool
+    @Binding var currentPage: Int
     
     // MARK: Private
     @State private var isSearching = false
@@ -24,7 +24,7 @@ struct CitySearchView: View {
     // MARK: - View Body
     var body: some View {
         
-        let cities: [SettingsAddedCity] = self.cityData.cities.map { SettingsAddedCity(cityName: $0) }
+        let cities: [SettingsAddedCity] = self.userSettings.cities.map { SettingsAddedCity(cityName: $0) }
         
         let vStack = VStack(spacing: 6) {
             
@@ -96,7 +96,7 @@ struct CitySearchView: View {
             if self.isSearching {
                 
                 CitySuggestionsListView(suggestions: searchCompleter.results, isPresented: self.$isPresented)
-                    .environmentObject(self.cityData)
+                    .environmentObject(self.userSettings)
                 
             } else {
                 
@@ -167,7 +167,12 @@ struct CitySearchView: View {
     }
     
     func deleteItems(at offsets: IndexSet) {
-        cityData.cities.remove(atOffsets: offsets)
+        
+        if currentPage == userSettings.cities.count - 1 {
+            currentPage = userSettings.cities.count - 2
+        }
+        
+        userSettings.cities.remove(atOffsets: offsets)
     }
 }
 
@@ -175,8 +180,9 @@ struct CitySearchView: View {
 struct ContentView_Previews: PreviewProvider {
     
     @State static var isPresented = true
+    @State static var currentPage = 0
     
     static var previews: some View {
-        CitySearchView(isPresented: $isPresented)
+        CitySearchView(isPresented: $isPresented, currentPage: $currentPage)
     }
 }

@@ -13,7 +13,6 @@ import SwiftUI
 struct PageView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var cityData: CityData
     @State var index = 0
     @State private var shouldShowDetailView = false
     
@@ -21,7 +20,7 @@ struct PageView: View {
     var body: some View {
         
         ZStack {
-            PageController(cityData.cities,
+            PageController(userSettings.cities,
                            currentPage: $index) { index, city in
                            CurrentWeatherView(city: city)
             }
@@ -32,7 +31,6 @@ struct PageView: View {
                     Spacer()
                     
                     Button(action: {
-                                        // TODO: Implement button action.
                                         self.shouldShowDetailView.toggle()
                                     }) {
                                         Image(UIConstants.Shared.Assets.menu)
@@ -40,8 +38,7 @@ struct PageView: View {
                                             .renderingMode(.original)
                                     }
                                     .sheet(isPresented: self.$shouldShowDetailView) {
-                                        CitySearchView(isPresented: self.$shouldShowDetailView)
-                                            .environmentObject(self.cityData)
+                                        CitySearchView(isPresented: self.$shouldShowDetailView, currentPage: self.$index)
                                             .environmentObject(self.userSettings)
                                     }
                                     .frame(width: 25,
@@ -57,7 +54,6 @@ struct PageView: View {
                 
                 Spacer()
             }
-            
         }
     }
 }
