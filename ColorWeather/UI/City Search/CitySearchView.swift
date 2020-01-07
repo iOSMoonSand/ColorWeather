@@ -157,8 +157,8 @@ struct CitySearchView: View {
         }
         .background(
             LinearGradient(gradient: Gradient(colors:
-                [ColorConstants.settingsGradientStart,
-                 ColorConstants.settingsGradientEnd]),
+                [ColorConstants.settingsGradient.start,
+                 ColorConstants.settingsGradient.end]),
                            startPoint: .topLeading,
                            endPoint: .bottomTrailing)
         )

@@ -40,6 +40,8 @@ final class TriHourlyForecastRequestService {
                         
                         guard
                             let dataDictionary = dataDictionary,
+                            let cityDictionary = dataDictionary["city"] as? JSONDictionary,
+                            let timezone = cityDictionary[WebClientConstants.timezoneObjectKey] as? Double,
                             let listArray = dataDictionary[WebClientConstants.listObjectKey] as? [JSONDictionary]
                             else {
                                 os_log(OSLogConstants.WebService.errorFailedDataModeling, log: .webService, type: .error)
@@ -60,10 +62,11 @@ final class TriHourlyForecastRequestService {
                                     return nil
                             }
                             
-                            let date = Date(timeIntervalSince1970: timeOfDataForecasted)
+                            let date = Date(timeIntervalSince1970: timeOfDataForecasted + timezone)
                             let dateFormatter = DateFormatter()
+                            dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
                             dateFormatter.locale = NSLocale.current
-                            dateFormatter.dateFormat = "EEEE ha"
+                            dateFormatter.dateFormat = "E ha"
                             let strDate = dateFormatter.string(from: date)
                             
                             return TriHourlyForecastDataModel(forecastTime: strDate,

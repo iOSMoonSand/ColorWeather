@@ -49,240 +49,250 @@ struct CurrentWeatherView: View {
         }
         
         let unit: UnitTemperature = userSettings.unitsInFahrenheit ? .fahrenheit : .celsius
-        let currentTemperature = Utilities.convert(temperature: currentWeatherViewModel.weatherData.temp ?? 0,
+        let currentTemperature = " " + Utilities.convert(temperature: currentWeatherViewModel.weatherData.temp,
                                                    from: .kelvin,
                                                    to: unit)
-        let currentLow = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMin ?? 0,
+        let currentLow = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMin,
                                            from: .kelvin,
                                            to: unit)
-        let currentHigh = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMax ?? 0,
+        let currentHigh = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMax,
                                             from: .kelvin,
                                             to: unit)
-        let firstForecastObjectLow = Utilities.convert(temperature: firstForecastObject.tempMin ?? 0,
-        from: .kelvin,
-        to: unit)
-        let firstForecastObjectHigh = Utilities.convert(temperature: firstForecastObject.tempMax ?? 0,
-        from: .kelvin,
-        to: unit)
-        let secondForecastObjectLow = Utilities.convert(temperature: secondForecastObject.tempMin ?? 0,
-        from: .kelvin,
-        to: unit)
-        let secondForecastObjectHigh = Utilities.convert(temperature: secondForecastObject.tempMax ?? 0,
-        from: .kelvin,
-        to: unit)
-        let thirdForecastObjectLow = Utilities.convert(temperature: thirdForecastObject.tempMin ?? 0,
-        from: .kelvin,
-        to: unit)
-        let thirdForecastObjectHigh = Utilities.convert(temperature: thirdForecastObject.tempMax ?? 0,
-        from: .kelvin,
-        to: unit)
+        let firstForecastObjectLow = Utilities.convert(temperature: firstForecastObject.tempMin,
+                                                       from: .kelvin,
+                                                       to: unit)
+        let firstForecastObjectHigh = Utilities.convert(temperature: firstForecastObject.tempMax,
+                                                        from: .kelvin,
+                                                        to: unit)
+        let secondForecastObjectLow = Utilities.convert(temperature: secondForecastObject.tempMin,
+                                                        from: .kelvin,
+                                                        to: unit)
+        let secondForecastObjectHigh = Utilities.convert(temperature: secondForecastObject.tempMax,
+                                                         from: .kelvin,
+                                                         to: unit)
+        let thirdForecastObjectLow = Utilities.convert(temperature: thirdForecastObject.tempMin,
+                                                       from: .kelvin,
+                                                       to: unit)
+        let thirdForecastObjectHigh = Utilities.convert(temperature: thirdForecastObject.tempMax,
+                                                        from: .kelvin,
+                                                        to: unit)
         
-        let geometryReader = GeometryReader { container in
+        let index = city.firstIndex(of: ",") ?? city.endIndex
+        let citySubstring = city[..<index]
+        let cityString = String(citySubstring)
+        
+        return ZStack {
             
-            VStack {
-                
-                Spacer()
-                    .frame(width: 0,
-                           height: 30,
-                           alignment: .center)
-                
-                
-                Group {
-                    Text(self.city)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .shadow(radius: 3)
-                    
-                    Text(self.currentWeatherViewModel.weatherData.description?.firstCapitalized ?? Constants.noDataDefault)
-                        .foregroundColor(Color.white)
-                        .shadow(radius: 3)
-                }
-                
-                Spacer()
-                
-                // TODO: Load image dynamically.
-                Image("cloudy")
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 150,
-                           height: 150,
-                           alignment: .center)
-                
-                Spacer()
+            DynamicBackgroundColor(id: currentWeatherViewModel.weatherData.icon)
+                .edgesIgnoringSafeArea(.all)
+            
+            GeometryReader { container in
                 
                 VStack {
-                    
-                    Text(currentTemperature)
-                        .font(.system(size: 100))
-                        .fontWeight(.ultraLight)
-                        .foregroundColor(Color.gray)
-                    
-                    Spacer()
-                        .frame(width: 0,
-                               height: 20,
-                               alignment: .center)
-                    
-                    HStack {
-                        
-                        VStack(alignment: .trailing) {
-                            
-                            HStack(alignment: .firstTextBaseline) {
-                                
-                                Text(Constants.lowTempSymbol)
-                                    .font(.system(size: 20))
-                                    .fontWeight(.thin)
-                                    .foregroundColor(Color.gray)
-                                
-                                Text(currentLow)
-                                    .font(.system(size: 30))
-                                    .foregroundColor(Color.gray)
-                            }
-                            
-                            Spacer()
-                                .frame(width: 0,
-                                       height: 15,
-                                       alignment: .center)
-                            
-                            Text(Constants.sunrise)
-                                .font(.system(size: 16))
-                                .fontWeight(.thin)
-                                .foregroundColor(Color.gray)
-                            
-                            Text("\(self.currentWeatherViewModel.weatherData.sunrise ?? Constants.noDataDefault)")
-                                .font(.system(size: 24))
-                                .foregroundColor(Color.gray)
-                        }
-                        
-                        Spacer()
-                            .frame(width: 50,
-                                   height: 0,
-                                   alignment: .center)
-                        
-                        VStack(alignment: .leading) {
-                            HStack(alignment: .firstTextBaseline) {
-                                Text(Constants.highTempSymbol)
-                                    .font(.system(size: 20))
-                                    .fontWeight(.thin)
-                                    .foregroundColor(Color.gray)
-                                
-                                Text(currentHigh)
-                                    .font(.system(size: 30))
-                                    .foregroundColor(Color.gray)
-                            }
-                            
-                            Spacer()
-                                .frame(width: 0,
-                                       height: 15,
-                                       alignment: .center)
-                            
-                            Text(Constants.sunset)
-                                .font(.system(size: 16))
-                                .fontWeight(.thin)
-                                .foregroundColor(Color.gray)
-                            
-                            // TODO: Use actual server data.
-                            Text("\(self.currentWeatherViewModel.weatherData.sunset ?? Constants.noDataDefault)")
-                                .font(.system(size: 24))
-                                .foregroundColor(Color.gray)
-                        }
-                    }
                     
                     Spacer()
                         .frame(width: 0,
                                height: 30,
                                alignment: .center)
                     
-                    // TODO filter server calls
-                    if !self.currentWeatherViewModel.triHourlyForecastDataModels.isEmpty {
-                        Group {
-                            Divider()
-                            HStack(spacing: 16) {
-                                Text("\(firstForecastObject.forecastTime ?? Constants.noDataDefault)")
-                                    .foregroundColor(Color.gray)
-                                Text("\(firstForecastObject.icon!)")
-                                    .foregroundColor(Color.gray)
-                                HStack {
-                                    HStack(spacing: 3) {
-                                        Text(Constants.lowTempSymbol)
-                                            .foregroundColor(Color.gray)
-                                        Text(firstForecastObjectLow)
-                                            .foregroundColor(Color.gray)
-                                    }
-                                    HStack(spacing: 3) {
-                                        Text(Constants.highTempSymbol)
-                                            .foregroundColor(Color.gray)
-                                        Text(firstForecastObjectHigh)
-                                            .foregroundColor(Color.gray)
-                                    }
+                    
+                    Group {
+                        Text(cityString)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .shadow(radius: 3)
+                        
+                        Text(self.currentWeatherViewModel.weatherData.description?.firstCapitalized ?? Constants.noDataDefault)
+                            .foregroundColor(Color.white)
+                            .shadow(radius: 3)
+                    }
+                    
+                    Spacer()
+                    
+                    // TODO: Load image dynamically.
+                    Image("cloudy")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 150,
+                               height: 150,
+                               alignment: .center)
+                    
+                    Spacer()
+                    
+                    VStack {
+                        
+                        Text(currentTemperature)
+                            .font(.system(size: 100))
+                            .fontWeight(.ultraLight)
+                            .foregroundColor(ColorConstants.Text.darkGray)
+                        
+                        Spacer()
+                            .frame(width: 0,
+                                   height: 20,
+                                   alignment: .center)
+                        
+                        HStack {
+                            
+                            VStack(alignment: .trailing) {
+                                
+                                HStack(alignment: .firstTextBaseline) {
+                                    
+                                    Text(Constants.lowTempSymbol)
+                                        .font(.system(size: 20))
+                                        .fontWeight(.thin)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    
+                                    Text(currentLow)
+                                        .font(.system(size: 30))
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                 }
+                                
+                                Spacer()
+                                    .frame(width: 0,
+                                           height: 15,
+                                           alignment: .center)
+                                
+                                Text(Constants.sunrise)
+                                    .font(.system(size: 16))
+                                    .fontWeight(.thin)
+                                    .foregroundColor(ColorConstants.Text.darkGray)
+                                
+                                Text("\(self.currentWeatherViewModel.weatherData.sunrise ?? Constants.noDataDefault)")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(ColorConstants.Text.darkGray)
                             }
                             
-                            Divider()
-                            HStack(spacing: 16) {
-                                Text("\(secondForecastObject.forecastTime ?? "--")")
-                                    .foregroundColor(Color.gray)
-                                Text("\(secondForecastObject.icon!)")
-                                    .foregroundColor(Color.gray)
-                                HStack {
-                                    HStack(spacing: 3) {
-                                        Text(Constants.lowTempSymbol)
-                                            .foregroundColor(Color.gray)
-                                        Text(secondForecastObjectLow)
-                                            .foregroundColor(Color.gray)
-                                    }
-                                    HStack(spacing: 3) {
-                                        Text(Constants.highTempSymbol)
-                                            .foregroundColor(Color.gray)
-                                        Text(secondForecastObjectHigh)
-                                            .foregroundColor(Color.gray)
+                            Spacer()
+                                .frame(width: 50,
+                                       height: 0,
+                                       alignment: .center)
+                            
+                            VStack(alignment: .leading) {
+                                HStack(alignment: .firstTextBaseline) {
+                                    Text(Constants.highTempSymbol)
+                                        .font(.system(size: 20))
+                                        .fontWeight(.thin)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    
+                                    Text(currentHigh)
+                                        .font(.system(size: 30))
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                }
+                                
+                                Spacer()
+                                    .frame(width: 0,
+                                           height: 15,
+                                           alignment: .center)
+                                
+                                Text(Constants.sunset)
+                                    .font(.system(size: 16))
+                                    .fontWeight(.thin)
+                                    .foregroundColor(ColorConstants.Text.darkGray)
+                                
+                                // TODO: Use actual server data.
+                                Text("\(self.currentWeatherViewModel.weatherData.sunset ?? Constants.noDataDefault)")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(ColorConstants.Text.darkGray)
+                            }
+                        }
+                        
+                        Spacer()
+                            .frame(width: 0,
+                                   height: 30,
+                                   alignment: .center)
+                        
+                        // TODO filter server calls
+                        if !self.currentWeatherViewModel.triHourlyForecastDataModels.isEmpty {
+                            Group {
+                                Divider()
+                                HStack(spacing: 16) {
+                                    Text("\(firstForecastObject.forecastTime ?? Constants.noDataDefault)")
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    Text("\(firstForecastObject.icon!)")
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    HStack {
+                                        HStack(spacing: 3) {
+                                            Text(Constants.lowTempSymbol)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                            Text(firstForecastObjectLow)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                        }
+                                        HStack(spacing: 3) {
+                                            Text(Constants.highTempSymbol)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                            Text(firstForecastObjectHigh)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                        }
                                     }
                                 }
-                            }
-                            Divider()
-                            HStack(spacing: 16) {
-                                Text("\(thirdForecastObject.forecastTime ?? "--")")
-                                    .foregroundColor(Color.gray)
-                                Text("\(thirdForecastObject.icon!)")
-                                    .foregroundColor(Color.gray)
-                                HStack {
-                                    HStack(spacing: 3) {
-                                        Text(Constants.lowTempSymbol)
-                                            .foregroundColor(Color.gray)
-                                        Text(thirdForecastObjectLow)
-                                            .foregroundColor(Color.gray)
+                                
+                                Divider()
+                                HStack(spacing: 16) {
+                                    Text("\(secondForecastObject.forecastTime ?? "--")")
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    Text("\(secondForecastObject.icon!)")
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    HStack {
+                                        HStack(spacing: 3) {
+                                            Text(Constants.lowTempSymbol)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                            Text(secondForecastObjectLow)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                        }
+                                        HStack(spacing: 3) {
+                                            Text(Constants.highTempSymbol)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                            Text(secondForecastObjectHigh)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                        }
                                     }
-                                    HStack(spacing: 3) {
-                                        Text(Constants.highTempSymbol)
-                                            .foregroundColor(Color.gray)
-                                        Text(thirdForecastObjectHigh)
-                                            .foregroundColor(Color.gray)
+                                }
+                                Divider()
+                                HStack(spacing: 16) {
+                                    Text("\(thirdForecastObject.forecastTime ?? "--")")
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    Text("\(thirdForecastObject.icon!)")
+                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    HStack {
+                                        HStack(spacing: 3) {
+                                            Text(Constants.lowTempSymbol)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                            Text(thirdForecastObjectLow)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                        }
+                                        HStack(spacing: 3) {
+                                            Text(Constants.highTempSymbol)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                            Text(thirdForecastObjectHigh)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    .frame(width: container.size.width - 40, height: container.size.height * 0.5, alignment: .center)
+                    .background(Color.white)
+                    .cornerRadius(25)
+                    .shadow(radius: 3)
+                    .opacity(0.5)
+                    
+                    Spacer()
+                        .frame(width: 0,
+                               height: 20,
+                               alignment: .center)
+                    
                 }
-                .frame(width: container.size.width - 40, height: container.size.height * 0.5, alignment: .center)
-                .background(Color.white)
-                .cornerRadius(25)
-                .shadow(radius: 3)
-                .opacity(0.9)
-                
-                Spacer()
-                    .frame(width: 0,
-                           height: 20,
-                           alignment: .center)
-                
-            }
-            .alert(isPresented: self.$shouldShowErrorAlert) {
-                // TODO: Clean up test code.
-                Alert(title: Text("Oops!"),
-                      message: Text("We're having some trouble retrieving your data, please try again later."),
-                      dismissButton: .default(Text("OK")))
-            }
-        } // GeometryReader
-        return geometryReader
+                .alert(isPresented: self.$shouldShowErrorAlert) {
+                    // TODO: Clean up test code.
+                    Alert(title: Text("Oops!"),
+                          message: Text("We're having some trouble retrieving your data, please try again later."),
+                          dismissButton: .default(Text("OK")))
+                }
+            }// GeometryReader
+        } // ZStack
+        
     } // body
     
     
@@ -357,13 +367,7 @@ struct CurrentWeatherView_Preview: PreviewProvider {
     
     static var previews: some View {
         CurrentWeatherView(city: "San Francisco")
-            .background(
-                LinearGradient(gradient: Gradient(colors:
-                    [ColorConstants.Sky.Day.clearGradientStart,
-                     ColorConstants.Sky.Day.clearGradientEnd]),
-                               startPoint: .top,
-                               endPoint: .bottom)
-        )
+            .background(ColorConstants.Sky.Day.clear)
             .edgesIgnoringSafeArea(.all)
     }
 }

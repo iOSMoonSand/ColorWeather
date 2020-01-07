@@ -16,7 +16,6 @@ struct PageView: View {
     @State var index = 0
     @State private var shouldShowDetailView = false
     
-    //TODO: Need to dynamically choose background color.
     var body: some View {
         
         ZStack {
@@ -26,12 +25,27 @@ struct PageView: View {
                                currentPage: $index) { index, city in
                                 CurrentWeatherView(city: city)
                 }
+                .edgesIgnoringSafeArea(.all)
             } else {
+                
+                LinearGradient(gradient: Gradient(colors:
+                    [ColorConstants.settingsGradient.start,
+                     ColorConstants.settingsGradient.end]),
+                               startPoint: .topLeading,
+                               endPoint: .bottomTrailing)
+                    .edgesIgnoringSafeArea(.all)
+                
                 Button(action: {
                     self.shouldShowDetailView.toggle()
                 }) {
                     Text("Tap to add a new city.")
+                        .italic()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                        .foregroundColor(Color(red: 250/255,
+                                               green: 250/255,
+                                               blue: 250/255))
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                    
                 }
             }
             
