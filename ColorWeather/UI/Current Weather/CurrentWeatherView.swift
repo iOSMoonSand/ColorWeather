@@ -50,8 +50,8 @@ struct CurrentWeatherView: View {
         
         let unit: UnitTemperature = userSettings.unitsInFahrenheit ? .fahrenheit : .celsius
         let currentTemperature = " " + Utilities.convert(temperature: currentWeatherViewModel.weatherData.temp,
-                                                   from: .kelvin,
-                                                   to: unit)
+                                                         from: .kelvin,
+                                                         to: unit)
         let currentLow = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMin,
                                            from: .kelvin,
                                            to: unit)
@@ -109,14 +109,18 @@ struct CurrentWeatherView: View {
                     }
                     
                     Spacer()
-                    
-                    // TODO: Load image dynamically.
-                    Image("cloudy")
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 150,
-                               height: 150,
-                               alignment: .center)
+                    if self.currentWeatherViewModel.weatherData.icon != nil {
+                        Image(self.currentWeatherViewModel.weatherData.icon!)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 250,
+                                   height: 250,
+                                   alignment: .center)
+                    } else {
+                        Text("Retrieving weather data.")
+                            .italic()
+                            .foregroundColor(Color.white)
+                    }
                     
                     Spacer()
                     
@@ -190,7 +194,6 @@ struct CurrentWeatherView: View {
                                     .fontWeight(.thin)
                                     .foregroundColor(ColorConstants.Text.darkGray)
                                 
-                                // TODO: Use actual server data.
                                 Text("\(self.currentWeatherViewModel.weatherData.sunset ?? Constants.noDataDefault)")
                                     .font(.system(size: 24))
                                     .foregroundColor(ColorConstants.Text.darkGray)
@@ -202,15 +205,25 @@ struct CurrentWeatherView: View {
                                    height: 30,
                                    alignment: .center)
                         
-                        // TODO filter server calls
                         if !self.currentWeatherViewModel.triHourlyForecastDataModels.isEmpty {
                             Group {
                                 Divider()
                                 HStack(spacing: 16) {
                                     Text("\(firstForecastObject.forecastTime ?? Constants.noDataDefault)")
                                         .foregroundColor(ColorConstants.Text.darkGray)
-                                    Text("\(firstForecastObject.icon!)")
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    
+                                    if firstForecastObject.icon != nil {
+                                        Image(firstForecastObject.icon!)
+                                            .resizable()
+                                            .aspectRatio(1, contentMode: .fit)
+                                            .frame(width: 30,
+                                                   height: 30,
+                                                   alignment: .center)
+                                    } else {
+                                        Text(Constants.noDataDefault)
+                                            .foregroundColor(ColorConstants.Text.darkGray)
+                                    }
+                                    
                                     HStack {
                                         HStack(spacing: 3) {
                                             Text(Constants.lowTempSymbol)
@@ -229,10 +242,21 @@ struct CurrentWeatherView: View {
                                 
                                 Divider()
                                 HStack(spacing: 16) {
-                                    Text("\(secondForecastObject.forecastTime ?? "--")")
+                                    Text("\(secondForecastObject.forecastTime ?? Constants.noDataDefault)")
                                         .foregroundColor(ColorConstants.Text.darkGray)
-                                    Text("\(secondForecastObject.icon!)")
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    
+                                    if secondForecastObject.icon != nil {
+                                        Image(secondForecastObject.icon!)
+                                            .resizable()
+                                            .aspectRatio(1, contentMode: .fit)
+                                            .frame(width: 30,
+                                                   height: 30,
+                                                   alignment: .center)
+                                    } else {
+                                        Text(Constants.noDataDefault)
+                                            .foregroundColor(ColorConstants.Text.darkGray)
+                                    }
+                                    
                                     HStack {
                                         HStack(spacing: 3) {
                                             Text(Constants.lowTempSymbol)
@@ -250,10 +274,21 @@ struct CurrentWeatherView: View {
                                 }
                                 Divider()
                                 HStack(spacing: 16) {
-                                    Text("\(thirdForecastObject.forecastTime ?? "--")")
+                                    Text("\(thirdForecastObject.forecastTime ?? Constants.noDataDefault)")
                                         .foregroundColor(ColorConstants.Text.darkGray)
-                                    Text("\(thirdForecastObject.icon!)")
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                    
+                                    if thirdForecastObject.icon != nil {
+                                        Image(thirdForecastObject.icon!)
+                                            .resizable()
+                                            .aspectRatio(1, contentMode: .fit)
+                                            .frame(width: 30,
+                                                   height: 30,
+                                                   alignment: .center)
+                                    } else {
+                                        Text(Constants.noDataDefault)
+                                            .foregroundColor(ColorConstants.Text.darkGray)
+                                    }
+                                    
                                     HStack {
                                         HStack(spacing: 3) {
                                             Text(Constants.lowTempSymbol)
@@ -272,7 +307,7 @@ struct CurrentWeatherView: View {
                             }
                         }
                     }
-                    .frame(width: container.size.width - 40, height: container.size.height * 0.5, alignment: .center)
+                    .frame(width: container.size.width - 40, height: container.size.height * 0.52, alignment: .center)
                     .background(Color.white)
                     .cornerRadius(25)
                     .shadow(radius: 3)
