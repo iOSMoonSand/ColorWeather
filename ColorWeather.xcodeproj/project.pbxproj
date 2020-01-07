@@ -35,6 +35,7 @@
 		5EADA5D623BA70270055DC35 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADA5D523BA70270055DC35 /* Utilities.swift */; };
 		5EADA5D823BA71E90055DC35 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADA5D723BA71E90055DC35 /* UserSettings.swift */; };
 		5EADA5DA23BB45F70055DC35 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADA5D923BB45F70055DC35 /* UserDefault.swift */; };
+		5EB0091F23BF50AB00C07A61 /* DynamicBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0091E23BF50AB00C07A61 /* DynamicBackgroundColor.swift */; };
 		5EB11BF52359BB43008B34CA /* OSLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */; };
 		5EB11BF7235E00D8008B34CA /* OSLogConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */; };
 		5EB14F422396E349001C447B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB14F412396E349001C447B /* MockURLProtocol.swift */; };
@@ -92,6 +93,7 @@
 		5EADA5D523BA70270055DC35 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5EADA5D723BA71E90055DC35 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		5EADA5D923BB45F70055DC35 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		5EB0091E23BF50AB00C07A61 /* DynamicBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBackgroundColor.swift; sourceTree = "<group>"; };
 		5EB11BF42359BB43008B34CA /* OSLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extension.swift"; sourceTree = "<group>"; };
 		5EB11BF6235E00D8008B34CA /* OSLogConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogConstants.swift; sourceTree = "<group>"; };
 		5EB14F37239581F1001C447B /* ColorWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 				5EBF9C2E23A7925100209A01 /* PageController.swift */,
 				5E067529237E9FA200794B7A /* CurrentWeatherView.swift */,
 				5E06752B237EA71800794B7A /* CurrentWeatherViewModel.swift */,
+				5EB0091E23BF50AB00C07A61 /* DynamicBackgroundColor.swift */,
 			);
 			path = "Current Weather";
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				5EA444862383DB7D006F19B2 /* PageView.swift in Sources */,
 				5E06752A237E9FA200794B7A /* CurrentWeatherView.swift in Sources */,
 				5E003F7E238EF2CD004DB2A8 /* StringProtocol+Extension.swift in Sources */,
+				5EB0091F23BF50AB00C07A61 /* DynamicBackgroundColor.swift in Sources */,
 				5E6A97B12334F537009B73A6 /* URL+Extension.swift in Sources */,
 				5EADA5D823BA71E90055DC35 /* UserSettings.swift in Sources */,
 				5EA444842383D781006F19B2 /* RepresentedPageViewController.swift in Sources */,

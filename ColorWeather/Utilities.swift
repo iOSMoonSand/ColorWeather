@@ -10,11 +10,15 @@ import Foundation
 
 struct Utilities {
     
-    static func convert(temperature: Double, from inputUnit: UnitTemperature, to outputUnit: UnitTemperature) -> String {
+    static func convert(temperature: Double?, from inputUnit: UnitTemperature, to outputUnit: UnitTemperature) -> String {
+        
+        guard let temperature = temperature else {
+            return "--"
+        }
         
         let measurementFormatter = MeasurementFormatter()
         measurementFormatter.numberFormatter.maximumFractionDigits = 0
-        measurementFormatter.unitOptions = .providedUnit
+        measurementFormatter.unitOptions = .temperatureWithoutUnit
         let input = Measurement(value: temperature, unit: inputUnit)
         let output = input.converted(to: outputUnit)
         

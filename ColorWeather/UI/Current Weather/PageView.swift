@@ -16,7 +16,6 @@ struct PageView: View {
     @State var index = 0
     @State private var shouldShowDetailView = false
     
-    //TODO: Need to dynamically choose background color.
     var body: some View {
         
         ZStack {
@@ -30,8 +29,8 @@ struct PageView: View {
             } else {
                 
                 LinearGradient(gradient: Gradient(colors:
-                    [ColorConstants.settingsGradientStart,
-                     ColorConstants.settingsGradientEnd]),
+                    [ColorConstants.settingsGradient.start,
+                     ColorConstants.settingsGradient.end]),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)

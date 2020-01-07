@@ -49,37 +49,42 @@ struct CurrentWeatherView: View {
         }
         
         let unit: UnitTemperature = userSettings.unitsInFahrenheit ? .fahrenheit : .celsius
-        let currentTemperature = Utilities.convert(temperature: currentWeatherViewModel.weatherData.temp ?? 0,
+        let currentTemperature = " " + Utilities.convert(temperature: currentWeatherViewModel.weatherData.temp,
                                                    from: .kelvin,
                                                    to: unit)
-        let currentLow = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMin ?? 0,
+        let currentLow = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMin,
                                            from: .kelvin,
                                            to: unit)
-        let currentHigh = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMax ?? 0,
+        let currentHigh = Utilities.convert(temperature: currentWeatherViewModel.weatherData.tempMax,
                                             from: .kelvin,
                                             to: unit)
-        let firstForecastObjectLow = Utilities.convert(temperature: firstForecastObject.tempMin ?? 0,
-        from: .kelvin,
-        to: unit)
-        let firstForecastObjectHigh = Utilities.convert(temperature: firstForecastObject.tempMax ?? 0,
-        from: .kelvin,
-        to: unit)
-        let secondForecastObjectLow = Utilities.convert(temperature: secondForecastObject.tempMin ?? 0,
-        from: .kelvin,
-        to: unit)
-        let secondForecastObjectHigh = Utilities.convert(temperature: secondForecastObject.tempMax ?? 0,
-        from: .kelvin,
-        to: unit)
-        let thirdForecastObjectLow = Utilities.convert(temperature: thirdForecastObject.tempMin ?? 0,
-        from: .kelvin,
-        to: unit)
-        let thirdForecastObjectHigh = Utilities.convert(temperature: thirdForecastObject.tempMax ?? 0,
-        from: .kelvin,
-        to: unit)
+        let firstForecastObjectLow = Utilities.convert(temperature: firstForecastObject.tempMin,
+                                                       from: .kelvin,
+                                                       to: unit)
+        let firstForecastObjectHigh = Utilities.convert(temperature: firstForecastObject.tempMax,
+                                                        from: .kelvin,
+                                                        to: unit)
+        let secondForecastObjectLow = Utilities.convert(temperature: secondForecastObject.tempMin,
+                                                        from: .kelvin,
+                                                        to: unit)
+        let secondForecastObjectHigh = Utilities.convert(temperature: secondForecastObject.tempMax,
+                                                         from: .kelvin,
+                                                         to: unit)
+        let thirdForecastObjectLow = Utilities.convert(temperature: thirdForecastObject.tempMin,
+                                                       from: .kelvin,
+                                                       to: unit)
+        let thirdForecastObjectHigh = Utilities.convert(temperature: thirdForecastObject.tempMax,
+                                                        from: .kelvin,
+                                                        to: unit)
+        
+        let index = city.firstIndex(of: ",") ?? city.endIndex
+        let citySubstring = city[..<index]
+        let cityString = String(citySubstring)
         
         return ZStack {
             
-            Color.red.edgesIgnoringSafeArea(.all)
+            DynamicBackgroundColor(id: currentWeatherViewModel.weatherData.icon)
+                .edgesIgnoringSafeArea(.all)
             
             GeometryReader { container in
                 
@@ -92,7 +97,7 @@ struct CurrentWeatherView: View {
                     
                     
                     Group {
-                        Text(self.city)
+                        Text(cityString)
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
@@ -120,7 +125,7 @@ struct CurrentWeatherView: View {
                         Text(currentTemperature)
                             .font(.system(size: 100))
                             .fontWeight(.ultraLight)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(ColorConstants.Text.darkGray)
                         
                         Spacer()
                             .frame(width: 0,
@@ -136,11 +141,11 @@ struct CurrentWeatherView: View {
                                     Text(Constants.lowTempSymbol)
                                         .font(.system(size: 20))
                                         .fontWeight(.thin)
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     
                                     Text(currentLow)
                                         .font(.system(size: 30))
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                 }
                                 
                                 Spacer()
@@ -151,11 +156,11 @@ struct CurrentWeatherView: View {
                                 Text(Constants.sunrise)
                                     .font(.system(size: 16))
                                     .fontWeight(.thin)
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(ColorConstants.Text.darkGray)
                                 
                                 Text("\(self.currentWeatherViewModel.weatherData.sunrise ?? Constants.noDataDefault)")
                                     .font(.system(size: 24))
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(ColorConstants.Text.darkGray)
                             }
                             
                             Spacer()
@@ -168,11 +173,11 @@ struct CurrentWeatherView: View {
                                     Text(Constants.highTempSymbol)
                                         .font(.system(size: 20))
                                         .fontWeight(.thin)
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     
                                     Text(currentHigh)
                                         .font(.system(size: 30))
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                 }
                                 
                                 Spacer()
@@ -183,12 +188,12 @@ struct CurrentWeatherView: View {
                                 Text(Constants.sunset)
                                     .font(.system(size: 16))
                                     .fontWeight(.thin)
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(ColorConstants.Text.darkGray)
                                 
                                 // TODO: Use actual server data.
                                 Text("\(self.currentWeatherViewModel.weatherData.sunset ?? Constants.noDataDefault)")
                                     .font(.system(size: 24))
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(ColorConstants.Text.darkGray)
                             }
                         }
                         
@@ -203,21 +208,21 @@ struct CurrentWeatherView: View {
                                 Divider()
                                 HStack(spacing: 16) {
                                     Text("\(firstForecastObject.forecastTime ?? Constants.noDataDefault)")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     Text("\(firstForecastObject.icon!)")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     HStack {
                                         HStack(spacing: 3) {
                                             Text(Constants.lowTempSymbol)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                             Text(firstForecastObjectLow)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                         }
                                         HStack(spacing: 3) {
                                             Text(Constants.highTempSymbol)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                             Text(firstForecastObjectHigh)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                         }
                                     }
                                 }
@@ -225,42 +230,42 @@ struct CurrentWeatherView: View {
                                 Divider()
                                 HStack(spacing: 16) {
                                     Text("\(secondForecastObject.forecastTime ?? "--")")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     Text("\(secondForecastObject.icon!)")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     HStack {
                                         HStack(spacing: 3) {
                                             Text(Constants.lowTempSymbol)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                             Text(secondForecastObjectLow)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                         }
                                         HStack(spacing: 3) {
                                             Text(Constants.highTempSymbol)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                             Text(secondForecastObjectHigh)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                         }
                                     }
                                 }
                                 Divider()
                                 HStack(spacing: 16) {
                                     Text("\(thirdForecastObject.forecastTime ?? "--")")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     Text("\(thirdForecastObject.icon!)")
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(ColorConstants.Text.darkGray)
                                     HStack {
                                         HStack(spacing: 3) {
                                             Text(Constants.lowTempSymbol)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                             Text(thirdForecastObjectLow)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                         }
                                         HStack(spacing: 3) {
                                             Text(Constants.highTempSymbol)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                             Text(thirdForecastObjectHigh)
-                                                .foregroundColor(Color.gray)
+                                                .foregroundColor(ColorConstants.Text.darkGray)
                                         }
                                     }
                                 }
@@ -271,7 +276,7 @@ struct CurrentWeatherView: View {
                     .background(Color.white)
                     .cornerRadius(25)
                     .shadow(radius: 3)
-                    .opacity(0.9)
+                    .opacity(0.5)
                     
                     Spacer()
                         .frame(width: 0,
@@ -362,13 +367,7 @@ struct CurrentWeatherView_Preview: PreviewProvider {
     
     static var previews: some View {
         CurrentWeatherView(city: "San Francisco")
-            .background(
-                LinearGradient(gradient: Gradient(colors:
-                    [ColorConstants.Sky.Day.clearGradientStart,
-                     ColorConstants.Sky.Day.clearGradientEnd]),
-                               startPoint: .top,
-                               endPoint: .bottom)
-        )
+            .background(ColorConstants.Sky.Day.clear)
             .edgesIgnoringSafeArea(.all)
     }
 }
