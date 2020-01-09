@@ -21,6 +21,7 @@ class CurrentWeatherViewModel: ObservableObject {
     // MARK: - Stateless Properties
     
     // MARK: Public
+    var didLoad = false
     var timeOfLatestCurrentWeatherData = Double()
     
     // MARK: Private
@@ -60,6 +61,7 @@ class CurrentWeatherViewModel: ObservableObject {
                     return
                 }
                 DispatchQueue.main.async {
+                    self.didLoad = true
                     self.timeOfLatestCurrentWeatherData = dataTime
                     self.weatherData = data
                 }
