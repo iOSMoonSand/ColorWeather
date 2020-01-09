@@ -13,6 +13,12 @@ struct UIConstants {
     // MARK: - Shared
     struct Shared {
         
+        static let noDataDefault = "--"
+        static let lowTempSymbol = "L"
+        static let highTempSymbol = "H"
+        static let sunset = "SUNSET"
+        static let sunrise = "SUNRISE"
+        
         // MARK: Assets
         struct Assets {
             static let menu = "menu"

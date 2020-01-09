@@ -25,6 +25,7 @@
 		5E3839E1239E4B7800242682 /* StringProtocolExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3839E0239E4B7800242682 /* StringProtocolExtensionTests.swift */; };
 		5E3839E3239E4CF300242682 /* URLExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3839E2239E4CF300242682 /* URLExtensionTests.swift */; };
 		5E3B569223C490580098C7DD /* ColorMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B569123C490570098C7DD /* ColorMap.swift */; };
+		5E3B569623C4E8E80098C7DD /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B569523C4E8E70098C7DD /* ForecastView.swift */; };
 		5E41F412238EC7DF00FB299E /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E41F411238EC7DF00FB299E /* ColorConstants.swift */; };
 		5E49A23D2355E89A0085AAC6 /* WeatherDataRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E49A23C2355E89A0085AAC6 /* WeatherDataRequestService.swift */; };
 		5E49A23F2355EDF50085AAC6 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E49A23E2355EDF50085AAC6 /* WeatherDataModel.swift */; };
@@ -84,6 +85,7 @@
 		5E3839E0239E4B7800242682 /* StringProtocolExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocolExtensionTests.swift; sourceTree = "<group>"; };
 		5E3839E2239E4CF300242682 /* URLExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionTests.swift; sourceTree = "<group>"; };
 		5E3B569123C490570098C7DD /* ColorMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMap.swift; sourceTree = "<group>"; };
+		5E3B569523C4E8E70098C7DD /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		5E41F411238EC7DF00FB299E /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		5E49A23C2355E89A0085AAC6 /* WeatherDataRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataRequestService.swift; sourceTree = "<group>"; };
 		5E49A23E2355EDF50085AAC6 /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				5E067529237E9FA200794B7A /* CurrentWeatherView.swift */,
 				5E06752B237EA71800794B7A /* CurrentWeatherViewModel.swift */,
 				5EB0091E23BF50AB00C07A61 /* DynamicBackgroundColor.swift */,
+				5E3B569523C4E8E70098C7DD /* ForecastView.swift */,
 			);
 			path = "Current Weather";
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				5EB5EDEA238D872300B73716 /* UIConstants.swift in Sources */,
 				5E49A23F2355EDF50085AAC6 /* WeatherDataModel.swift in Sources */,
 				5EE7FFED23BA616C0064BD7A /* SysModel.swift in Sources */,
+				5E3B569623C4E8E80098C7DD /* ForecastView.swift in Sources */,
 				5EC9EF8D2330B9D3000B1621 /* CitySearchView.swift in Sources */,
 				5EBF9C2F23A7925100209A01 /* PageController.swift in Sources */,
 				5EFB1D4623B8D8E000665EDB /* UIApplication+Extension.swift in Sources */,
@@ -651,17 +655,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexis Schreier (CQSVM6M94G)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"ColorWeather/Preview Content\"";
-				DEVELOPMENT_TEAM = Q7DNMW64ZP;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ColorWeather/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iosmoonsand.colorweather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexisschreier.colorweather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "ColorWeather iOS Development Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -671,17 +677,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexis Schreier (T32WTHET6X)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"ColorWeather/Preview Content\"";
-				DEVELOPMENT_TEAM = Q7DNMW64ZP;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ColorWeather/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iosmoonsand.colorweather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexisschreier.colorweather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "ColorWeather iOS Distribution Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
