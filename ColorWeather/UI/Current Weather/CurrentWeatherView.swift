@@ -90,7 +90,8 @@ struct CurrentWeatherView: View {
                         Text(currentTemperature)
                             .font(.system(size: 90))
                             .fontWeight(.ultraLight)
-                            .foregroundColor(ColorConstants.Text.darkGray)
+                            .foregroundColor(Color.white)
+                            .shadow(radius: 1)
                         
                         HStack {
                             
@@ -101,22 +102,26 @@ struct CurrentWeatherView: View {
                                     Text(UIConstants.Shared.lowTempSymbol)
                                         .font(.system(size: 20))
                                         .fontWeight(.thin)
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                        .foregroundColor(Color.white)
+                                        .shadow(radius: 1)
                                     
                                     Text(currentLow)
                                         .font(.system(size: 30))
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                        .foregroundColor(Color.white)
+                                        .shadow(radius: 1)
                                 }.padding([.bottom], 15)
                                 
                                 // Sunrise.
                                 Text(UIConstants.Shared.sunrise)
                                     .font(.system(size: 16))
                                     .fontWeight(.thin)
-                                    .foregroundColor(ColorConstants.Text.darkGray)
+                                    .foregroundColor(Color.white)
+                                    .shadow(radius: 1)
                                 
                                 Text("\(self.currentWeatherViewModel.weatherData.sunrise ?? UIConstants.Shared.noDataDefault)")
                                     .font(.system(size: 24))
-                                    .foregroundColor(ColorConstants.Text.darkGray)
+                                    .foregroundColor(Color.white)
+                                    .shadow(radius: 1)
                             }
                             
                             Spacer()
@@ -130,21 +135,25 @@ struct CurrentWeatherView: View {
                                     Text(UIConstants.Shared.highTempSymbol)
                                         .font(.system(size: 20))
                                         .fontWeight(.thin)
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                        .foregroundColor(Color.white)
+                                        .shadow(radius: 1)
                                     
                                     Text(currentHigh)
                                         .font(.system(size: 30))
-                                        .foregroundColor(ColorConstants.Text.darkGray)
+                                        .foregroundColor(Color.white)
+                                        .shadow(radius: 1)
                                 }.padding([.bottom], 15)
                                 
                                 Text(UIConstants.Shared.sunset)
                                     .font(.system(size: 16))
                                     .fontWeight(.thin)
-                                    .foregroundColor(ColorConstants.Text.darkGray)
+                                    .foregroundColor(Color.white)
+                                    .shadow(radius: 1)
                                 
                                 Text("\(self.currentWeatherViewModel.weatherData.sunset ?? UIConstants.Shared.noDataDefault)")
                                     .font(.system(size: 24))
-                                    .foregroundColor(ColorConstants.Text.darkGray)
+                                    .foregroundColor(Color.white)
+                                    .shadow(radius: 1)
                             }
                         }
                         
@@ -156,10 +165,6 @@ struct CurrentWeatherView: View {
                                          units: units)
                         }
                     }
-                    .background(Color.white)
-                    .cornerRadius(25)
-                    .shadow(radius: 3)
-                    .opacity(0.5)
                 }
             }
             .padding([.leading, .trailing, .top, .bottom], 30)

@@ -36,102 +36,123 @@ struct ForecastView: View {
         
         return VStack(alignment: .center) {
             Divider()
-            HStack(spacing: 16) {
-                Text("\(dataModels[0].forecastTime ?? UIConstants.Shared.noDataDefault)")
-                    .foregroundColor(ColorConstants.Text.darkGray)
-                
-                if dataModels[0].icon != nil {
-                    Image(dataModels[0].icon!)
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 30,
-                               height: 30,
-                               alignment: .center)
-                } else {
-                    Text(UIConstants.Shared.noDataDefault)
-                        .foregroundColor(ColorConstants.Text.darkGray)
+                .background(Color.white)
+            
+            ZStack(alignment: .center) {
+                HStack(spacing: 60) {
+                    Text("\(dataModels[0].forecastTime ?? UIConstants.Shared.noDataDefault)")
+                        .foregroundColor(Color.white)
+                        .shadow(radius: 1)
+                        .frame(width: 120, height: 40, alignment: .trailing)
+                    
+                    HStack {
+                        HStack(spacing: 3) {
+                            Text(UIConstants.Shared.lowTempSymbol)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                            Text(firstForecastObjectLow)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                        }
+                        HStack(spacing: 3) {
+                            Text(UIConstants.Shared.highTempSymbol)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                            Text(firstForecastObjectHigh)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                        }
+                    }
+                    .frame(width: 120, height: 40, alignment: .leading)
                 }
                 
-                HStack {
-                    HStack(spacing: 3) {
-                        Text(UIConstants.Shared.lowTempSymbol)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                        Text(firstForecastObjectLow)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                    }
-                    HStack(spacing: 3) {
-                        Text(UIConstants.Shared.highTempSymbol)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                        Text(firstForecastObjectHigh)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                    }
+                if dataModels[0].icon != nil {
+                    Image(dataModels[0].icon!).asThumbnail()
+                } else {
+                    Text(UIConstants.Shared.noDataDefault)
+                        .foregroundColor(Color.white)
                 }
             }
             
             Divider()
-            HStack(spacing: 16) {
-                Text("\(dataModels[1].forecastTime ?? UIConstants.Shared.noDataDefault)")
-                    .foregroundColor(ColorConstants.Text.darkGray)
+                .background(Color.white)
+            
+            ZStack(alignment: .center) {
+                HStack(spacing: 60) {
+                    Text("\(dataModels[1].forecastTime ?? UIConstants.Shared.noDataDefault)")
+                        .foregroundColor(Color.white)
+                        .shadow(radius: 1)
+                        .frame(width: 120, height: 40, alignment: .trailing)
+                    
+                    HStack {
+                        HStack(spacing: 3) {
+                            Text(UIConstants.Shared.lowTempSymbol)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                            Text(secondForecastObjectLow)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                        }
+                        HStack(spacing: 3) {
+                            Text(UIConstants.Shared.highTempSymbol)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                            Text(secondForecastObjectHigh)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                        }
+                    }
+                    .frame(width: 120, height: 40, alignment: .leading)
+                    
+                }
                 
                 if dataModels[1].icon != nil {
-                    Image(dataModels[1].icon!)
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 30,
-                               height: 30,
-                               alignment: .center)
+                    Image(dataModels[1].icon!).asThumbnail()
                 } else {
                     Text(UIConstants.Shared.noDataDefault)
-                        .foregroundColor(ColorConstants.Text.darkGray)
-                }
-                
-                HStack {
-                    HStack(spacing: 3) {
-                        Text(UIConstants.Shared.lowTempSymbol)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                        Text(secondForecastObjectLow)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                    }
-                    HStack(spacing: 3) {
-                        Text(UIConstants.Shared.highTempSymbol)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                        Text(secondForecastObjectHigh)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                    }
+                        .foregroundColor(Color.white)
                 }
             }
+            
             Divider()
-            HStack(spacing: 16) {
-                Text("\(dataModels[2].forecastTime ?? UIConstants.Shared.noDataDefault)")
-                    .foregroundColor(ColorConstants.Text.darkGray)
+                .background(Color.white)
+            
+            ZStack(alignment: .center) {
+                HStack(spacing: 60) {
+                    Text("\(dataModels[2].forecastTime ?? UIConstants.Shared.noDataDefault)")
+                        .foregroundColor(Color.white)
+                        .shadow(radius: 1)
+                        .frame(width: 120, height: 40, alignment: .trailing)
+                    
+                    HStack {
+                        HStack(spacing: 3) {
+                            Text(UIConstants.Shared.lowTempSymbol)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                            Text(thirdForecastObjectLow)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                        }
+                        HStack(spacing: 3) {
+                            Text(UIConstants.Shared.highTempSymbol)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                            Text(thirdForecastObjectHigh)
+                                .foregroundColor(Color.white)
+                                .shadow(radius: 1)
+                        }
+                    }
+                    .frame(width: 120, height: 40, alignment: .leading)
+                }
                 
                 if dataModels[2].icon != nil {
-                    Image(dataModels[2].icon!)
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 30,
-                               height: 30,
-                               alignment: .center)
+                    Image(dataModels[2].icon!).asThumbnail()
                 } else {
                     Text(UIConstants.Shared.noDataDefault)
-                        .foregroundColor(ColorConstants.Text.darkGray)
+                        .foregroundColor(Color.white)
                 }
-                
-                HStack {
-                    HStack(spacing: 3) {
-                        Text(UIConstants.Shared.lowTempSymbol)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                        Text(thirdForecastObjectLow)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                    }
-                    HStack(spacing: 3) {
-                        Text(UIConstants.Shared.highTempSymbol)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                        Text(thirdForecastObjectHigh)
-                            .foregroundColor(ColorConstants.Text.darkGray)
-                    }
-                }
-            }.padding([.bottom], 20)
+            }
+            .padding([.bottom], 20)
         }
     }
     
