@@ -62,16 +62,19 @@ struct CurrentWeatherView: View {
             
             VStack {
                 
+                // City name
                 Text(cityString)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .shadow(radius: 3)
                 
+                // Weather description
                 Text(self.currentWeatherViewModel.weatherData.description?.firstCapitalized ?? UIConstants.Shared.noDataDefault)
                     .foregroundColor(Color.white)
                     .shadow(radius: 3)
                 
+                // Weather icon
                 if self.currentWeatherViewModel.weatherData.icon != nil {
                     Image(self.currentWeatherViewModel.weatherData.icon!)
                         .resizable()
@@ -84,9 +87,11 @@ struct CurrentWeatherView: View {
                         .italic()
                         .foregroundColor(Color.white)
                 }
+                
                 if currentWeatherViewModel.didLoad {
-                    VStack { // Details bubble.
+                    VStack {
                         
+                        // Current temperature
                         Text(currentTemperature)
                             .font(.system(size: 90))
                             .fontWeight(.ultraLight)
@@ -95,66 +100,20 @@ struct CurrentWeatherView: View {
                         
                         HStack {
                             
-                            VStack(alignment: .trailing) { // Low temp and sunrise.
-                                
-                                HStack(alignment: .firstTextBaseline) { // Low temp.
-                                    
-                                    Text(UIConstants.Shared.lowTempSymbol)
-                                        .font(.system(size: 20))
-                                        .fontWeight(.thin)
-                                        .foregroundColor(Color.white)
-                                        .shadow(radius: 1)
-                                    
-                                    Text(currentLow)
-                                        .font(.system(size: 30))
-                                        .foregroundColor(Color.white)
-                                        .shadow(radius: 1)
-                                }.padding([.bottom], 15)
-                                
-                                // Sunrise.
-                                Text(UIConstants.Shared.sunrise)
-                                    .font(.system(size: 16))
-                                    .fontWeight(.thin)
-                                    .foregroundColor(Color.white)
-                                    .shadow(radius: 1)
-                                
-                                Text("\(self.currentWeatherViewModel.weatherData.sunrise ?? UIConstants.Shared.noDataDefault)")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(Color.white)
-                                    .shadow(radius: 1)
-                            }
+                            CurrentWeatherDetailsView(highLowSymbol: UIConstants.Shared.lowTempSymbol,
+                                                      temp: currentLow,
+                                                      isSunset: false,
+                                                      sunTime: self.currentWeatherViewModel.weatherData.sunrise ?? UIConstants.Shared.noDataDefault)
                             
                             Spacer()
                                 .frame(width: 40,
                                        height: 0,
                                        alignment: .center)
                             
-                            VStack(alignment: .leading) { // High temp and sunset.
-                                
-                                HStack(alignment: .firstTextBaseline) { // High temp.
-                                    Text(UIConstants.Shared.highTempSymbol)
-                                        .font(.system(size: 20))
-                                        .fontWeight(.thin)
-                                        .foregroundColor(Color.white)
-                                        .shadow(radius: 1)
-                                    
-                                    Text(currentHigh)
-                                        .font(.system(size: 30))
-                                        .foregroundColor(Color.white)
-                                        .shadow(radius: 1)
-                                }.padding([.bottom], 15)
-                                
-                                Text(UIConstants.Shared.sunset)
-                                    .font(.system(size: 16))
-                                    .fontWeight(.thin)
-                                    .foregroundColor(Color.white)
-                                    .shadow(radius: 1)
-                                
-                                Text("\(self.currentWeatherViewModel.weatherData.sunset ?? UIConstants.Shared.noDataDefault)")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(Color.white)
-                                    .shadow(radius: 1)
-                            }
+                            CurrentWeatherDetailsView(highLowSymbol: UIConstants.Shared.highTempSymbol,
+                                                      temp: currentHigh,
+                                                      isSunset: true,
+                                                      sunTime: self.currentWeatherViewModel.weatherData.sunset ?? UIConstants.Shared.noDataDefault)
                         }
                         
                         if !self.currentWeatherViewModel.triHourlyForecastDataModels.isEmpty {

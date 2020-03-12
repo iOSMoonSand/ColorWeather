@@ -35,124 +35,31 @@ struct ForecastView: View {
                                                         to: units)
         
         return VStack(alignment: .center) {
-            Divider()
-                .background(Color.white)
-            
-            ZStack(alignment: .center) {
-                HStack(spacing: 60) {
-                    Text("\(dataModels[0].forecastTime ?? UIConstants.Shared.noDataDefault)")
-                        .foregroundColor(Color.white)
-                        .shadow(radius: 1)
-                        .frame(width: 120, height: 40, alignment: .trailing)
-                    
-                    HStack {
-                        HStack(spacing: 3) {
-                            Text(UIConstants.Shared.lowTempSymbol)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                            Text(firstForecastObjectLow)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                        }
-                        HStack(spacing: 3) {
-                            Text(UIConstants.Shared.highTempSymbol)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                            Text(firstForecastObjectHigh)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                        }
-                    }
-                    .frame(width: 120, height: 40, alignment: .leading)
-                }
-                
-                if dataModels[0].icon != nil {
-                    Image(dataModels[0].icon!).asThumbnail()
-                } else {
-                    Text(UIConstants.Shared.noDataDefault)
-                        .foregroundColor(Color.white)
-                }
-            }
             
             Divider()
                 .background(Color.white)
             
-            ZStack(alignment: .center) {
-                HStack(spacing: 60) {
-                    Text("\(dataModels[1].forecastTime ?? UIConstants.Shared.noDataDefault)")
-                        .foregroundColor(Color.white)
-                        .shadow(radius: 1)
-                        .frame(width: 120, height: 40, alignment: .trailing)
-                    
-                    HStack {
-                        HStack(spacing: 3) {
-                            Text(UIConstants.Shared.lowTempSymbol)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                            Text(secondForecastObjectLow)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                        }
-                        HStack(spacing: 3) {
-                            Text(UIConstants.Shared.highTempSymbol)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                            Text(secondForecastObjectHigh)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                        }
-                    }
-                    .frame(width: 120, height: 40, alignment: .leading)
-                    
-                }
-                
-                if dataModels[1].icon != nil {
-                    Image(dataModels[1].icon!).asThumbnail()
-                } else {
-                    Text(UIConstants.Shared.noDataDefault)
-                        .foregroundColor(Color.white)
-                }
-            }
+            ForecastRow(time: dataModels[0].forecastTime ?? UIConstants.Shared.noDataDefault,
+                        icon: dataModels[0].icon ?? "",
+                        lowTemp: firstForecastObjectLow,
+                        highTemp: firstForecastObjectHigh)
             
             Divider()
                 .background(Color.white)
             
-            ZStack(alignment: .center) {
-                HStack(spacing: 60) {
-                    Text("\(dataModels[2].forecastTime ?? UIConstants.Shared.noDataDefault)")
-                        .foregroundColor(Color.white)
-                        .shadow(radius: 1)
-                        .frame(width: 120, height: 40, alignment: .trailing)
-                    
-                    HStack {
-                        HStack(spacing: 3) {
-                            Text(UIConstants.Shared.lowTempSymbol)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                            Text(thirdForecastObjectLow)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                        }
-                        HStack(spacing: 3) {
-                            Text(UIConstants.Shared.highTempSymbol)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                            Text(thirdForecastObjectHigh)
-                                .foregroundColor(Color.white)
-                                .shadow(radius: 1)
-                        }
-                    }
-                    .frame(width: 120, height: 40, alignment: .leading)
-                }
-                
-                if dataModels[2].icon != nil {
-                    Image(dataModels[2].icon!).asThumbnail()
-                } else {
-                    Text(UIConstants.Shared.noDataDefault)
-                        .foregroundColor(Color.white)
-                }
-            }
-            .padding([.bottom], 20)
+            ForecastRow(time: dataModels[1].forecastTime ?? UIConstants.Shared.noDataDefault,
+                        icon: dataModels[1].icon ?? "",
+                        lowTemp: secondForecastObjectLow,
+                        highTemp: secondForecastObjectHigh)
+            
+            Divider()
+                .background(Color.white)
+            
+            ForecastRow(time: dataModels[2].forecastTime ?? UIConstants.Shared.noDataDefault,
+                        icon: dataModels[2].icon ?? "",
+                        lowTemp: thirdForecastObjectLow,
+                        highTemp: thirdForecastObjectHigh)
+                .padding([.bottom], 20)
         }
     }
     
