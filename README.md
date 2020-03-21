@@ -1,10 +1,10 @@
 # ColorWeather
 ColorWeather is a simple, yet playful app built with [SwiftUI](https://developer.apple.com/documentation/swiftui)! It's a personal project that I decided to make public so that anyone can check out the trials and tribulations I had to go through and am still going through to build and ship an app created with SwiftUI to the App Store. Hope you enjoy.
 
-*The most recent committed changes (not yet on the App Store) can be found on the `develop` branch. I'm using a git-flow branching system.*
+*As of today the MVP version of the app can ne found on the [App Store](https://apps.apple.com/ph/app/weathercolor/id1494279648). The most recent committed changes can be found on the `develop` branch. I'm using a git-flow branching system.*
 
 
-Here are some screenshots of the current `develop` version that is not yet visible on the App Store because of a bug in the SwiftUI framework itself that is not letting me get the new version approved by the App Store Review team:
+Here are some screenshots of the current `develop` version. It's a newer version that is not yet visible on the App Store because of a bug in the SwiftUI framework itself that is not letting me get it approved by the App Store review team:
 
 
 <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3.jpg?raw=true" width="250"/> <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3%20(1).jpg?raw=true" width="250"/> <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3%20(2).jpg?raw=true" width="250"/> <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3%20(3).jpg?raw=true" width="250"/> <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3%20(4).jpg?raw=true" width="250"/> <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3%20(5).jpg?raw=true" width="250"/> <img src="https://github.com/iOSMoonSand/ColorWeather/blob/master/appstore-screenshots/0x0ss-P3%20(6).jpg?raw=true" width="250"/>
