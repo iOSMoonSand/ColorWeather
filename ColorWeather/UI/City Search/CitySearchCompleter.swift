@@ -10,9 +10,10 @@ import Combine
 import MapKit
 import SwiftUI
 
-class CitySearchCompleter: NSObject, ObservableObject {
+final class CitySearchCompleter: NSObject, ObservableObject {
     
     let objectWillChange = ObservableObjectPublisher()
+    
     var results: [String] = [] {
         willSet {
             self.objectWillChange.send()
