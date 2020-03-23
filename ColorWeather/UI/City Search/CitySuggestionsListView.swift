@@ -26,6 +26,7 @@ struct CitySuggestionsListView: View {
                 Text(suggestion)
                     .onTapGesture {
                         self.userSettings.cities.append(suggestion)
+                        UserDefaults.standard.set(self.userSettings.cities, forKey: "Cities")
                         self.isPresented = false
                 }
             }

@@ -14,12 +14,13 @@ struct CitySearchView: View {
     
     // MARK: Public
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var searchCompleter = CitySearchCompleter()
+    @EnvironmentObject var searchCompleter: CitySearchCompleter
     @Binding var isPresented: Bool
     @Binding var currentPage: Int
     
     // MARK: Private
     @State private var isSearching = false
+    
     
     // MARK: - View Body
     var body: some View {
@@ -177,6 +178,7 @@ struct CitySearchView: View {
         }
         
         userSettings.cities.remove(atOffsets: offsets)
+        UserDefaults.standard.set(userSettings.cities, forKey: "Cities")
     }
 }
 
