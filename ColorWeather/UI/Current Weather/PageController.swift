@@ -30,9 +30,9 @@ struct PageController<Data, Content>: View where Data: RandomAccessCollection, C
                 let hostingController = HostingController(rootView: view)
                 hostingController.view.backgroundColor = .clear
                 
-                if let currentWeatherView = view as? CurrentWeatherView {
+                if let modifiedContent = view as? ModifiedContent<CurrentWeatherView, _EnvironmentKeyWritingModifier<Optional<UserSettings>>> {
                     hostingController.viewDidAppearHandler = {
-                        currentWeatherView.updateViewData()
+                        modifiedContent.content.updateViewData()
                     }
                 }
                 

@@ -26,6 +26,7 @@ struct PageView: View {
                 PageController(userSettings.cities,
                                currentPage: $index) { index, city in
                                 CurrentWeatherView(city: city)
+                                    .environmentObject(self.userSettings)
                 }
                 .edgesIgnoringSafeArea(.all)
             } else {
