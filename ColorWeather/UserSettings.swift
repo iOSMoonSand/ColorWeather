@@ -10,21 +10,19 @@ import SwiftUI
 import Combine
 
 final class UserSettings: ObservableObject {
+    
+    init() {
+        self.unitsInFahrenheit = UserDefaults.standard.object(forKey: "UnitsInFahrenheit") as? Bool ?? true
+        self.cities = UserDefaults.standard.object(forKey: "Cities") as? [String] ?? [String]()
+    }
 
-    let objectWillChange = PassthroughSubject<Void, Never>()
-
-    @UserDefault("UnitsInFahrenheit", defaultValue: true)
-    var unitsInFahrenheit: Bool {
-        willSet {
-            objectWillChange.send()
+    @Published
+    var unitsInFahrenheit: Bool = true {
+        didSet {
+            UserDefaults.standard.set(unitsInFahrenheit, forKey: "UnitsInFahrenheit")
         }
     }
     
-    // TODO: Replace default values with empty state.
-    @UserDefault("Cities", defaultValue: [])
-    var cities: [String] {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+    @Published
+    var cities: [String] = []
 }

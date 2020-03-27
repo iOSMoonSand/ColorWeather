@@ -16,6 +16,8 @@ struct PageView: View {
     @State var index = 0
     @State private var shouldShowDetailView = false
     
+    var searchCompleter = CitySearchCompleter()
+    
     var body: some View {
         
         ZStack {
@@ -24,6 +26,7 @@ struct PageView: View {
                 PageController(userSettings.cities,
                                currentPage: $index) { index, city in
                                 CurrentWeatherView(city: city)
+                                    .environmentObject(self.userSettings)
                 }
                 .edgesIgnoringSafeArea(.all)
             } else {
@@ -64,6 +67,7 @@ struct PageView: View {
                     .sheet(isPresented: self.$shouldShowDetailView) {
                         CitySearchView(isPresented: self.$shouldShowDetailView, currentPage: self.$index)
                             .environmentObject(self.userSettings)
+                            .environmentObject(self.searchCompleter)
                     }
                     .frame(width: 25,
                            height: 25,
